@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "78915811096",
+    "project_id": "myfirstapp1969",
+    "storage_bucket": "myfirstapp1969.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78915811096:android:6e2ae81ff80a0e9c6c506d",
+        "android_client_info": {
+          "package_name": "com.example.dailyreport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78915811096-4kk7a9jnnc4voha00lkub810sfs5ivsv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvA-TMLr6kZLaFqPjaMaWC2c2pSIH0Yis"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78915811096-4kk7a9jnnc4voha00lkub810sfs5ivsv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "78915811096-gskb031pbgtp3q8qmp2mrgo0fl7s41fg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dailyreport"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
