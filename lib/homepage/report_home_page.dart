@@ -1,8 +1,12 @@
+import 'package:dailyreport/book_list/book_list_page.dart';
+
 import '/domain/book.dart';
 import '/domain/homepage.dart';
 import '/homepage/report_home_model.dart';
 
 import '/setting/setting_list_page.dart';
+import '/setting/icon_select_page.dart';
+
 import '/book_list/book_list_model.dart';
 import '/add_book/add_book_page.dart';
 import '/edit_book/edit_book_page.dart';
@@ -21,7 +25,7 @@ class ReportHomePage extends StatelessWidget {
       create: (_) => HomePageModel()..fetchReportList(_today),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('日誌'),
+          title: Text(DateFormat.yMMMEd('ja').format(DateTime.now()) + '日誌'),
           actions: [
             IconButton(
                 onPressed: () async {
@@ -48,9 +52,22 @@ class ReportHomePage extends StatelessWidget {
                   (books) => Slidable(
                     actionPane: SlidableDrawerActionPane(),
                     child: ListTile(
-                      title: Text(books.type),
-                      subtitle: Text(books.diary),
-                    ),
+                        onTap: () {
+                          //項目入力をしたい
+                        },
+                        onLongPress: () async {
+                          //日誌一覧 ☆type別にしたい
+                          final String? title = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BookListPage(),
+                            ),
+                          );
+                        },
+                        leading: _iconset(books.type),
+                        title: Text(books.type),
+                        subtitle: Text(books.diary),
+                        trailing: Icon(Icons.list_alt_outlined)),
                     secondaryActions: <Widget>[
                       IconSlideAction(
                         caption: '編集',
@@ -161,5 +178,50 @@ class ReportHomePage extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+Widget _iconset(String index) {
+  switch (index) {
+    case '1':
+      return Icon(Icons.account_circle, size: 64, color: Colors.black);
+      break;
+    case '2':
+      return Icon(Icons.info, size: 64, color: Colors.black);
+      break;
+    case '3':
+      return Icon(Icons.check_circle, size: 64, color: Colors.black);
+      break;
+    case '4':
+      return Icon(Icons.article, size: 64, color: Colors.black);
+      break;
+    case '5':
+      return Icon(Icons.schedule, size: 64, color: Colors.black);
+      break;
+    case '6':
+      return Icon(Icons.event, size: 64, color: Colors.black);
+      break;
+    case '7':
+      return Icon(Icons.thumb_up, size: 64, color: Colors.black);
+      break;
+    case '8':
+      return Icon(Icons.sick, size: 64, color: Colors.black);
+      break;
+    case '9':
+      return Icon(Icons.mail, size: 64, color: Colors.black);
+
+      break;
+    case '10':
+      return Icon(Icons.flag, size: 64, color: Colors.black);
+      break;
+    case '11':
+      return Icon(Icons.report, size: 64, color: Colors.black);
+      break;
+    case '12':
+      return Icon(Icons.email, size: 64, color: Colors.black);
+      break;
+    default:
+      return Icon(Icons.stop, size: 64, color: Colors.red);
+      break;
   }
 }
