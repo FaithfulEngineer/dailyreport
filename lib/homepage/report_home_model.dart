@@ -6,10 +6,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class BookListModel extends ChangeNotifier {
+class HomePageModel extends ChangeNotifier {
   List<Book>? books;
   List<Setting>? settings;
-  HomePage? homepages;
+  List<HomePage>? homepages;
 
   void fetchReportList(String day)
   // day : '0' => today
@@ -27,16 +27,6 @@ class BookListModel extends ChangeNotifier {
     DateTime _staDate;
     DateTime _endDate;
 
-    var list = [];
-    var list2 = [];
-    var list3 = [];
-    var list4 = [];
-    var homepagelist = [];
-
-    String _type = "";
-    int _con = 0;
-    int _con1 = 0;
-
     // switch　に変更する事
     if (day == '0') {
       _staDate = DateTime(now.year, now.month, now.day);
@@ -46,54 +36,39 @@ class BookListModel extends ChangeNotifier {
       _endDate = _staDate.add(Duration(days: 1));
     }
 
-    final QuerySnapshot snapshot =
-        await FirebaseFirestore.instance.collection('setting').get();
-
-    final QuerySnapshot snapshot2 = await FirebaseFirestore.instance
+    final QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection('report')
         .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(_staDate))
         .where('date', isLessThan: Timestamp.fromDate(_endDate))
         .get();
 
-    snapshot.docs.forEach((Element) {
-      list.add(Element.get('type'));
-      list2.add(Element.get('contents'));
-    });
-    snapshot2.docs.forEach((Element) {
-      list3.add(Element.get('dairy'));
-      list4.add(Element.get('type'));
-    });
+    //book
+    final List<Book> books = snapshot.docs.map((DocumentSnapshot document) {
+      Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+      final String id = document.id;
+      final String type = data['type'];
+      final DateTime reportdated = data['date'].toDate();
+      final String reportdate = DateFormat.yMMMEd('ja').format(reportdated);
+      final String dairy = data['dairy'];
+      return Book(id, type, reportdate, dairy);
+    }).toList();
+    this.books = books;
 
-    for (final i in list) {
-      for (final j in list4) {
-        if (list[_con1] == list4[_con]) {
-          homepagelist.add(j);
-          homepages?.type = j; // CLASS
-          homepagelist.add(list2[_con1]);
-          homepages?.contents = list2[_con1]; // CLASS
-          homepagelist.add(list3[_con]);
-          homepages?.dairy = list3[_con]; // CLASS
-          _con = 0;
-          _con1++;
-          _type = '1';
-          break;
-        } else
-          _con++;
-      }
-      if (_type != '1') {
-        homepagelist.add(i);
-        homepages?.type = i; // CLASS
-        homepagelist.add(list2[_con1]);
-        homepages?.contents = list2[_con1]; // CLASS
-        homepagelist.add("");
-        homepages?.dairy = ""; // CLASS
-        _con1++;
-        _con = 0;
-        _type = '';
-      } else
-        _type = '';
-    }
+    final QuerySnapshot snapshot2 =
+        await FirebaseFirestore.instance.collection('setting').get();
 
+    //setting
+    final List<Setting> settings =
+        snapshot2.docs.map((DocumentSnapshot document) {
+      Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+      final String id = document.id;
+      final String type = data['type'];
+      final String contents = data['contents'];
+      return Setting(id, type, contents);
+    }).toList();
+    this.settings = settings;
+
+    this.homepages = homepages;
     notifyListeners();
   }
 

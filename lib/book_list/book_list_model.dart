@@ -13,10 +13,11 @@ class BookListModel extends ChangeNotifier {
     final List<Book> books = snapshot.docs.map((DocumentSnapshot document) {
       Map<String, dynamic> data = document.data() as Map<String, dynamic>;
       final String id = document.id;
+      final String type = data['type'];
       final DateTime reportdated = data['date'].toDate();
       final String reportdate = DateFormat.yMMMEd('ja').format(reportdated);
       final String dairy = data['dairy'];
-      return Book(id, reportdate, dairy);
+      return Book(id, type, reportdate, dairy);
     }).toList();
 
     this.books = books;
