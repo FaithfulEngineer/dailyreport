@@ -1,3 +1,4 @@
+import '/domain/book.dart';
 import '/add_book/add_book_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,9 @@ DateTime setDate = DateTime.now();
 TextEditingController _textEditingController = TextEditingController();
 
 class AddBookPage extends StatelessWidget {
+  final String email;
+  AddBookPage(this.email);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AddBookModel>(
@@ -54,6 +58,7 @@ class AddBookPage extends StatelessWidget {
                       if (title != null) {
                         model.typeController.text = title;
                         model.setType(title);
+                        model.email = email;
                       }
                     },
                   ),
@@ -65,6 +70,7 @@ class AddBookPage extends StatelessWidget {
                     ),
                     onChanged: (text) {
                       model.dairy = text;
+                      model.email = email;
                     },
                   ),
                   SizedBox(

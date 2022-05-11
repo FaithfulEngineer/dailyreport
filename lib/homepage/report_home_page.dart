@@ -10,6 +10,7 @@ import '/setting/icon_select_page.dart';
 import '/book_list/book_list_model.dart';
 import '/add_book/add_book_page.dart';
 import '/edit_book/edit_book_page.dart';
+import 'package:dailyreport/login/login_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -17,6 +18,7 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 String _today = '0'; //仮
+String _email = 'NA';
 
 class ReportHomePage extends StatelessWidget {
   @override
@@ -28,7 +30,26 @@ class ReportHomePage extends StatelessWidget {
           title: Text(DateFormat.yMMMEd('ja').format(DateTime.now()) + '日誌'),
           actions: [
             IconButton(
+              onPressed: () async {
+                // ログイン画面表示
+                final String email = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginPage(),
+                    fullscreenDialog: true,
+                  ),
+                );
+                if (email != null) {
+                  _email = email;
+                  //login中のメッセージアイコンの色を変えるなどできないか
+                } else
+                  _email = 'null';
+              },
+              icon: Icon(Icons.person),
+            ),
+            IconButton(
                 onPressed: () async {
+                  //個人設定画面表示
                   final String? title = await Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -53,14 +74,14 @@ class ReportHomePage extends StatelessWidget {
                     actionPane: SlidableDrawerActionPane(),
                     child: ListTile(
                         onTap: () {
-                          //項目入力をしたい
+                          //項目入力をしたいaddbookpage
                         },
                         onLongPress: () async {
                           //日誌一覧 ☆type別にしたい
                           final String? title = await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => BookListPage(),
+                              builder: (context) => BookListPage(_email),
                             ),
                           );
                         },
@@ -117,10 +138,11 @@ class ReportHomePage extends StatelessWidget {
           return FloatingActionButton(
             onPressed: () async {
               // 画面遷移
+              //print('add-email' + _email);
               final bool? added = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddBookPage(),
+                  builder: (context) => AddBookPage(_email),
                   fullscreenDialog: true,
                 ),
               );

@@ -6,6 +6,7 @@ class AddBookModel extends ChangeNotifier {
   String? reportdate;
   String? dairy;
   String? type;
+  String? email;
   DateTime reportdated = DateTime.now();
 
   var typeController = TextEditingController();
@@ -23,11 +24,18 @@ class AddBookModel extends ChangeNotifier {
       throw '種別（数字）が入力されていません';
     }
 
+    if (email == 'NA' || email == "") {
+      throw 'emailアドレスが設定されていません';
+    }
+
+    //print('更新直前' + email!);
+
     // firestoreに追加
     await FirebaseFirestore.instance.collection('report').add({
       'date': reportdated,
       'type': type,
       'dairy': dairy,
+      'email': email,
     });
   }
 

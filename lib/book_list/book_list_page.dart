@@ -9,6 +9,9 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 class BookListPage extends StatelessWidget {
+  final String email;
+  BookListPage(this.email);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<BookListModel>(
@@ -97,7 +100,7 @@ class BookListPage extends StatelessWidget {
               final bool? added = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddBookPage(),
+                  builder: (context) => AddBookPage(email),
                   fullscreenDialog: true,
                 ),
               );

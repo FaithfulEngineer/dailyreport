@@ -17,7 +17,13 @@ class BookListModel extends ChangeNotifier {
       final DateTime reportdated = data['date'].toDate();
       final String reportdate = DateFormat.yMMMEd('ja').format(reportdated);
       final String dairy = data['dairy'];
-      return Book(id, type, reportdate, dairy);
+
+      final String email = 'NA';
+      if (data['email'] != null) {
+        final String email = data['email'];
+      }
+
+      return Book(id, type, reportdate, dairy, email);
     }).toList();
 
     this.books = books;

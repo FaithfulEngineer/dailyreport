@@ -178,7 +178,7 @@ class Iconsetting extends StatelessWidget {
   Widget build(BuildContext context) {
     onWillPop:
     () {
-      Navigator.of(context).pop("test");
+      Navigator.of(context).pop();
       return Future.value(false);
     };
     return Scaffold(
