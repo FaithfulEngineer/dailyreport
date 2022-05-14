@@ -19,15 +19,17 @@ import 'package:intl/intl.dart';
 
 String _today = '0'; //仮
 String _email = 'NA';
+Color? _color = Colors.orange;
 
 class ReportHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomePageModel>(
-      create: (_) => HomePageModel()..fetchReportList(_today),
+      create: (_) => HomePageModel()..fetchReportList(_today, _email),
       child: Scaffold(
         appBar: AppBar(
           title: Text(DateFormat.yMMMEd('ja').format(DateTime.now()) + '日誌'),
+          backgroundColor: _color,
           actions: [
             IconButton(
               onPressed: () async {
@@ -41,7 +43,10 @@ class ReportHomePage extends StatelessWidget {
                 );
                 if (email != null) {
                   _email = email;
+                  _color = Colors.blue;
+                  HomePageModel().setemail();
                   //login中のメッセージアイコンの色を変えるなどできないか
+                  //appberをビルドしなおさないと変わらないようです。
                 } else
                   _email = 'null';
               },
@@ -112,7 +117,7 @@ class ReportHomePage extends StatelessWidget {
                                 .showSnackBar(snackBar);
                           }
 
-                          model.fetchReportList(_today);
+                          model.fetchReportList(_today, _email);
                         },
                       ),
                       IconSlideAction(
@@ -121,7 +126,7 @@ class ReportHomePage extends StatelessWidget {
                         icon: Icons.delete,
                         onTap: () async {
                           // 削除しますか？って聞いて、はいだったら削除
-                          //await showConfirmDialog(context, book, model);
+                          await showConfirmDialog(context, books, model);
                         },
                       ),
                     ],
@@ -155,7 +160,7 @@ class ReportHomePage extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               }
 
-              model.fetchReportList(_today);
+              model.fetchReportList(_today, _email);
             },
             tooltip: 'Increment',
             child: Icon(Icons.add),
@@ -192,7 +197,7 @@ class ReportHomePage extends StatelessWidget {
                   backgroundColor: Colors.red,
                   content: Text('${book.reportdate}を削除しました'),
                 );
-                model.fetchReportList(_today);
+                model.fetchReportList(_today, _email);
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),
