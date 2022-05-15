@@ -37,7 +37,7 @@ Widget _iconset(int index) {
       return Icon(Icons.report, size: 64, color: Colors.black);
       break;
     case 12:
-      return Icon(Icons.email, size: 64, color: Colors.black);
+      return Icon(Icons.camera, size: 64, color: Colors.black);
       break;
     default:
       return Icon(Icons.stop, size: 64, color: Colors.red);
@@ -160,7 +160,7 @@ Widget _iconButtonset(BuildContext context, int index) {
     case 12:
       return IconButton(
         icon: Icon(
-          Icons.email,
+          Icons.camera,
         ),
         iconSize: 64,
         color: Colors.black,
@@ -227,7 +227,7 @@ class Iconsetting extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              for (int idx = 4; idx < 7; idx++) ...[
+              for (int idx = 10; idx < 13; idx++) ...[
                 _iconButtonset(context, idx)
               ],
             ],

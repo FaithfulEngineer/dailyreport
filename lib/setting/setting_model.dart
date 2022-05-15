@@ -8,6 +8,7 @@ class SettingListModel extends ChangeNotifier {
   void fetchSettingList() async {
     final QuerySnapshot snapshot =
         await FirebaseFirestore.instance.collection('setting').get();
+    //検索条件追加　emailで抽出
 
     final List<Setting> settings =
         snapshot.docs.map((DocumentSnapshot document) {
@@ -15,8 +16,13 @@ class SettingListModel extends ChangeNotifier {
       final String id = document.id;
       final String type = data['type'];
       final String contents = data['contents'];
-      return Setting(id, type, contents);
+      final String email = data['email'];
+      return Setting(id, type, contents, email);
     }).toList();
+
+    settings.sort((a, b) {
+      return a.type[0].compareTo(b.type[0]);
+    });
 
     this.settings = settings;
     notifyListeners();

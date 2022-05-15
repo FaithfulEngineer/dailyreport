@@ -43,4 +43,9 @@ class LoginModel extends ChangeNotifier {
       final uid = currentUser!.uid;
     }
   }
+
+  Future logout() async {
+    await FirebaseAuth.instance.signOut();
+    email = 'NA';
+  }
 }

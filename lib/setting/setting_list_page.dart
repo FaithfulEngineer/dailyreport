@@ -3,13 +3,22 @@ import 'package:dailyreport/setting/setting_model.dart';
 import '/domain/setting.dart';
 import '/add_setting/add_setting_page.dart';
 import '/edit_setting/edit_setting_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 
 class SettingListPage extends StatelessWidget {
+  final String email;
+  SettingListPage(this.email);
+
   @override
   Widget build(BuildContext context) {
+    onWillPop:
+    () {
+      Navigator.of(context).pop();
+      return Future.value(false);
+    };
     return ChangeNotifierProvider<SettingListModel>(
       create: (_) => SettingListModel()..fetchSettingList(),
       child: Scaffold(
@@ -31,6 +40,11 @@ class SettingListPage extends StatelessWidget {
                     child: ListTile(
                       leading: _iconset(Setting.type),
                       title: Text(Setting.contents),
+                      onTap: () {
+                        Navigator.of(context).pop(Setting.type +
+                            ':' +
+                            Setting.contents); //type:contents
+                      },
                     ),
                     secondaryActions: <Widget>[
                       IconSlideAction(
@@ -85,7 +99,7 @@ class SettingListPage extends StatelessWidget {
               final bool? added = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddSettingPage(),
+                  builder: (context) => AddSettingPage(email),
                   fullscreenDialog: true,
                 ),
               );

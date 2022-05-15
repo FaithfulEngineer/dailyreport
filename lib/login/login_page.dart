@@ -83,6 +83,13 @@ class LoginPage extends StatelessWidget {
                         },
                         child: Text('新規登録の方はこちら'),
                       ),
+                      TextButton(
+                        onPressed: () async {
+                          model.logout();
+                          Navigator.of(context).pop(context);
+                        },
+                        child: Text('ログアウト'),
+                      ),
                     ],
                   ),
                 ),

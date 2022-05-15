@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class AddBookModel extends ChangeNotifier {
-  String? reportdate;
+  String? reportdate = DateFormat.yMMMEd('ja').format(DateTime.now());
   String? dairy;
   String? type;
   String? email;
+  String? contents;
   DateTime reportdated = DateTime.now();
 
   var typeController = TextEditingController();
@@ -36,6 +38,7 @@ class AddBookModel extends ChangeNotifier {
       'type': type,
       'dairy': dairy,
       'email': email,
+      'contents': contents,
     });
   }
 

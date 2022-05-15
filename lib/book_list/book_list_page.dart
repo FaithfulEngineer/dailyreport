@@ -10,12 +10,13 @@ import 'package:intl/intl.dart';
 
 class BookListPage extends StatelessWidget {
   final String email;
-  BookListPage(this.email);
+  final String type;
+  BookListPage(this.email, this.type);
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<BookListModel>(
-      create: (_) => BookListModel()..fetchBookList(),
+      create: (_) => BookListModel()..fetchBookList(email, type),
       child: Scaffold(
         appBar: AppBar(
           title: Text('日誌一覧'),
@@ -25,7 +26,7 @@ class BookListPage extends StatelessWidget {
                   final String? title = await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SettingListPage(),
+                      builder: (context) => SettingListPage(email),
                     ),
                   );
                 },
@@ -45,7 +46,8 @@ class BookListPage extends StatelessWidget {
                   (book) => Slidable(
                     actionPane: SlidableDrawerActionPane(),
                     child: ListTile(
-                      title: Text(book.reportdate),
+                      leading: Text(book.reportdate),
+                      title: Text(book.contets),
                       subtitle: Text(book.diary),
                     ),
                     secondaryActions: <Widget>[
@@ -71,7 +73,7 @@ class BookListPage extends StatelessWidget {
                                 .showSnackBar(snackBar);
                           }
 
-                          model.fetchBookList();
+                          model.fetchBookList(email, type);
                         },
                       ),
                       IconSlideAction(
@@ -113,7 +115,7 @@ class BookListPage extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               }
 
-              model.fetchBookList();
+              model.fetchBookList(email, type);
             },
             tooltip: 'Increment',
             child: Icon(Icons.add),
@@ -150,7 +152,7 @@ class BookListPage extends StatelessWidget {
                   backgroundColor: Colors.red,
                   content: Text('${book.reportdate}を削除しました'),
                 );
-                model.fetchBookList();
+                model.fetchBookList(email, type);
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),

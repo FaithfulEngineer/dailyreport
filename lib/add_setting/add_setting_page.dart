@@ -4,6 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:dailyreport/setting/icon_select_page.dart';
 
 class AddSettingPage extends StatelessWidget {
+  final String email;
+  AddSettingPage(this.email);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AddSettingModel>(
@@ -40,7 +43,11 @@ class AddSettingPage extends StatelessWidget {
                     ),
                     onChanged: (text) {
                       model.contents = text;
+                      model.email = email;
                     },
+                  ),
+                  SizedBox(
+                    height: 12,
                   ),
                   IconButton(
                     icon: _iconset(model.type),
@@ -51,16 +58,15 @@ class AddSettingPage extends StatelessWidget {
                           builder: (context) => Iconsetting(),
                         ),
                       );
-                      print(title);
-
                       if (title != null) {
                         model.typeController.text = title;
                         model.setType(title);
+                        model.email = email;
                       }
                     },
                   ),
                   SizedBox(
-                    height: 16,
+                    height: 24,
                   ),
                   ElevatedButton(
                     onPressed: () async {
@@ -126,7 +132,7 @@ class AddSettingPage extends StatelessWidget {
         return Icon(Icons.email, size: 64, color: Colors.black);
         break;
       default:
-        return Icon(Icons.ac_unit, size: 64, color: Colors.red);
+        return Icon(Icons.ac_unit, size: 32, color: Colors.red);
         break;
     }
   }

@@ -2,7 +2,8 @@ import '/domain/book.dart';
 import '/add_book/add_book_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dailyreport/setting/icon_select_page.dart';
+import '/setting/setting_list_page.dart';
+//import 'package:dailyreport/setting/icon_select_page.dart';
 
 DateTime? _selectedDate;
 DateTime setDate = DateTime.now();
@@ -32,7 +33,6 @@ class AddBookPage extends StatelessWidget {
                     ),
                     controller: _textEditingController,
                     onChanged: (text) {
-                      //★日付チェックが必要
                       model.reportdated = setDate;
                     },
                   ),
@@ -40,9 +40,9 @@ class AddBookPage extends StatelessWidget {
                       onPressed: () {
                         _selectDate(context);
                       },
-                      icon: Icon(Icons.calendar_today)),
+                      icon: Icon(Icons.calendar_month, size: 32)),
                   SizedBox(
-                    height: 8,
+                    height: 24,
                   ),
                   IconButton(
                     icon: _iconset(model.type),
@@ -50,15 +50,17 @@ class AddBookPage extends StatelessWidget {
                       final String? title = await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Iconsetting(),
+                          builder: (context) => SettingListPage(email),
                         ),
                       );
-                      print(title);
 
                       if (title != null) {
-                        model.typeController.text = title;
-                        model.setType(title);
+                        var temp = title.split(':');
+
+                        model.typeController.text = temp[0];
+                        model.contents = temp[1];
                         model.email = email;
+                        model.setType(temp[0]);
                       }
                     },
                   ),
@@ -140,7 +142,7 @@ class AddBookPage extends StatelessWidget {
         return Icon(Icons.email, size: 64, color: Colors.black);
         break;
       default:
-        return Icon(Icons.ac_unit, size: 64, color: Colors.red);
+        return Icon(Icons.ac_unit, size: 32, color: Colors.red);
         break;
     }
   }

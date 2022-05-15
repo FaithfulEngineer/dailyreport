@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class AddSettingModel extends ChangeNotifier {
   String? type;
   String? contents;
+  String? email;
 
   var typeController = TextEditingController();
 
@@ -16,10 +17,15 @@ class AddSettingModel extends ChangeNotifier {
       throw '内容が入力されてません';
     }
 
+    if (email == 'NA' || email == "") {
+      throw 'emailアドレスが設定されていません';
+    }
+
     // firestoreに追加
     await FirebaseFirestore.instance.collection('setting').add({
       'type': type,
       'contents': contents,
+      'email': email,
     });
   }
 
