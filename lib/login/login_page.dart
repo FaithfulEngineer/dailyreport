@@ -39,6 +39,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       TextField(
                         controller: model.authorController,
+                        obscureText: true,
                         decoration: InputDecoration(
                           hintText: 'パスワード',
                         ),
