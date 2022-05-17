@@ -12,42 +12,18 @@ import 'package:intl/intl.dart';
 
 class HomePageModel extends ChangeNotifier {
   List<Book>? books;
-  bool chgflg = false;
-  bool flag = false;
+  DateTime? now;
+  String? email;
 
-  void fetchReportList(String day, String email) async {
-    DateTime now;
+  //void fetchReportList(String day, String email) async {
+  void fetchReportList() async {
     DateTime _staDate;
     DateTime _endDate;
 
-    var _now = DateTime.now();
-    switch (day) {
-      case '1':
-        now = _now.add(Duration(days: 1)); // day : '+1' => tommorow
-        break;
-      case '2':
-        now =
-            _now.add(Duration(days: 2)); // day : '+2' => the day after tommorow
-        break;
-      case '3':
-        now = _now.add(Duration(days: 3)); // day : '+3' => more
-        break;
-      case '-1':
-        now = _now.add(Duration(days: -1)); // day : '-1' => yesterday
-        break;
-      case '-2':
-        now = _now
-            .add(Duration(days: -2)); // day : '-2' => the day before yesterday
-        break;
-      case '-3':
-        now = _now.add(Duration(days: -3)); // day : '-3' => more
-        break;
-      default:
-        now = _now; // day : '0' => today
-        break;
-    }
+    if (now == null) now = DateTime.now();
+    if (email == null) email = 'NotAvailable';
 
-    _staDate = DateTime(now.year, now.month, now.day);
+    _staDate = DateTime(this.now!.year, this.now!.month, this.now!.day);
     _endDate = _staDate.add(Duration(days: 1));
 
     final QuerySnapshot snapshot = await FirebaseFirestore.instance
@@ -57,7 +33,6 @@ class HomePageModel extends ChangeNotifier {
         .where('date', isLessThan: Timestamp.fromDate(_endDate))
         .get();
 
-    //book
     final List<Book> books = snapshot.docs.map((DocumentSnapshot document) {
       Map<String, dynamic> data = document.data() as Map<String, dynamic>;
       final String id = document.id;
@@ -79,12 +54,59 @@ class HomePageModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void refresh() {
-    if (chgflg = true) {
-      Future.delayed(const Duration(seconds: 1)).then((_) {
-        chgflg = false;
-      });
-      notifyListeners();
+  void setemail(String email) {
+    this.email = email;
+    notifyListeners();
+  }
+
+//検索日付の設定(未来は明々後日まで、過去は6日間）
+  void setday(int idx) {
+    var _now = DateTime.now();
+    switch (idx) {
+      case 1:
+        this.now = _now.add(Duration(days: 1)); // day : '+1' => tommorow
+        notifyListeners();
+        break;
+      case 2:
+        this.now =
+            _now.add(Duration(days: 2)); // day : '+2' => the day after tommorow
+        notifyListeners();
+        break;
+      case 3:
+        this.now = _now.add(Duration(days: 3)); // day : '+3' => more
+        notifyListeners();
+        break;
+      case -1:
+        this.now = _now.add(Duration(days: -1)); // day : '-1' => yesterday
+        notifyListeners();
+        break;
+      case -2:
+        this.now = _now
+            .add(Duration(days: -2)); // day : '-2' => the day before yesterday
+        notifyListeners();
+        break;
+      case -3:
+        this.now = _now.add(Duration(days: -3)); // day : '-3' => more
+        notifyListeners();
+        break;
+      case -4:
+        this.now = _now.add(Duration(days: -4)); // day : '-4' => more
+        notifyListeners();
+        break;
+      case -5:
+        this.now = _now.add(Duration(days: -5)); // day : '-5' => more
+        notifyListeners();
+        break;
+      case -6:
+        this.now = _now.add(Duration(days: -6)); // day : '-5' => more
+        notifyListeners();
+        break;
+
+      default:
+        this.now = _now; // day : '0' => today
+        notifyListeners();
+
+        break;
     }
   }
 

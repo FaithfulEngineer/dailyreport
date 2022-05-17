@@ -27,197 +27,196 @@ class ReportHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomePageModel>(
-        create: (_) => HomePageModel()..fetchReportList(_today, _email),
-        child: Scaffold(
-          appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(100),
-              child: Consumer<HomePageModel>(builder: (context, model, child) {
-                return AppBar(
-                  title: Text(_headdate),
-                  backgroundColor:
-                      (_email == 'NA') ? Colors.orange : Colors.blue,
-                  actions: [
-                    IconButton(
-                        onPressed: () async {
-                          if (_email != 'NA') {
-                            model.chgflg = true;
-                            _idx++;
-                            _today = _idx.toString();
-                            _dtoday = _dtoday.add(Duration(days: 1));
-                            _headdate = DateFormat.MMMEd('ja').format(_dtoday);
-                          }
-                          await HomePageModel()
-                            ..fetchReportList(_today, _email);
-                          HomePageModel().refresh();
-                        },
-                        icon: Icon(Icons.arrow_back)),
-                    IconButton(
-                        onPressed: () async {
-                          if (_email != 'NA') {
-                            model.chgflg = true;
-                            _idx--;
-                            _today = _idx.toString();
-                            _dtoday = _dtoday.add(Duration(days: -1));
-                            _headdate = DateFormat.MMMEd('ja').format(_dtoday);
-                          }
-                          await HomePageModel()
-                            ..fetchReportList(_today, _email);
-                          HomePageModel().refresh();
-                        },
-                        icon: Icon(Icons.arrow_forward)),
-                    IconButton(
-                      onPressed: () async {
-                        // ログイン画面表示
+        create: (_) => HomePageModel()..fetchReportList(),
+        child: Consumer<HomePageModel>(builder: (context, model, child) {
+          final List<Book>? books = model.books;
 
-                        final String email = await Navigator.push(
+          return Scaffold(
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(100),
+              child: AppBar(
+                title: Text(_headdate),
+                backgroundColor: (_email == 'NA') ? Colors.orange : Colors.blue,
+                actions: [
+                  IconButton(
+                      onPressed: () async {
+                        if (_email != 'NA') {
+                          _idx++;
+                          model.setday(_idx);
+                          _today = _idx.toString();
+                          _dtoday = _dtoday.add(Duration(days: 1));
+                          _headdate = DateFormat.MMMEd('ja').format(_dtoday);
+                        }
+
+                        model.fetchReportList();
+                      },
+                      icon: Icon(Icons.arrow_back)),
+                  IconButton(
+                      onPressed: () async {
+                        if (_email != 'NA') {
+                          _idx--;
+                          model.setday(_idx);
+                          _today = _idx.toString();
+                          _dtoday = _dtoday.add(Duration(days: -1));
+                          _headdate = DateFormat.MMMEd('ja').format(_dtoday);
+                        }
+                        model.fetchReportList();
+                      },
+                      icon: Icon(Icons.arrow_forward)),
+                  IconButton(
+                    onPressed: () async {
+                      // ログイン画面表示
+
+                      final String email = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginPage(),
+                          fullscreenDialog: true,
+                        ),
+                      );
+                      if (email != null) {
+                        _email = email;
+                        model.setemail(_email);
+                        model.fetchReportList();
+                      } else
+                        _email = 'NA';
+                    },
+                    icon: Icon(Icons.person),
+                  ),
+                  IconButton(
+                      onPressed: () async {
+                        //個人設定画面表示
+                        final String? title = await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => LoginPage(),
-                            fullscreenDialog: true,
+                            builder: (context) => SettingListPage(_email),
                           ),
                         );
-                        if (email != null) {
-                          _email = email;
-                          model.chgflg = true;
-                          await HomePageModel()
-                            ..fetchReportList(_today, _email);
-                          HomePageModel().refresh();
-                        } else
-                          _email = 'NA';
                       },
-                      icon: Icon(Icons.person),
-                    ),
-                    IconButton(
-                        onPressed: () async {
-                          //個人設定画面表示
-                          final String? title = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SettingListPage(_email),
-                            ),
-                          );
-                        },
-                        icon: Icon(Icons.construction))
-                  ],
-                );
-              })),
-          body: Center(
-            child: Consumer<HomePageModel>(builder: (context, model, child) {
-              final List<Book>? books = model.books;
-              if (books == null) {
-                return CircularProgressIndicator();
-              }
+                      icon: Icon(Icons.construction))
+                ],
+              ),
+              // })
+            ),
+            body: Center(
+              child: Consumer<HomePageModel>(builder: (context, model, child) {
+                final List<Book>? books = model.books;
 
-              final List<Widget> widgets = books
-                  .map(
-                    (books) => Slidable(
-                      actionPane: SlidableDrawerActionPane(),
-                      child: ListTile(
-                          onTap: () async {
-                            //編集
-                            final String? title = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EditBookPage(books),
-                              ),
-                            );
-
-                            if (title != null) {
-                              final snackBar = SnackBar(
-                                backgroundColor: Colors.green,
-                                content: Text('$titleを編集しました'),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            }
-                            model.fetchReportList(_today, _email);
-                          },
-                          onLongPress: () async {
-                            final String? title = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    BookListPage(_email, books.type),
-                              ),
-                            );
-                          },
-                          leading: _iconset(books.type),
-                          title: Text(books.contets),
-                          subtitle: Text(books.diary),
-                          trailing: Icon(Icons.list_alt_outlined)),
-                      secondaryActions: <Widget>[
-                        IconSlideAction(
-                          caption: '編集',
-                          color: Colors.black45,
-                          icon: Icons.edit,
-                          onTap: () async {
-                            // 編集画面に遷移
-                            final String? title = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EditBookPage(books),
-                              ),
-                            );
-
-                            if (title != null) {
-                              final snackBar = SnackBar(
-                                backgroundColor: Colors.green,
-                                content: Text('$titleを編集しました'),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            }
-
-                            model.fetchReportList(_today, _email);
-                          },
-                        ),
-                        IconSlideAction(
-                          caption: '削除',
-                          color: Colors.red,
-                          icon: Icons.delete,
-                          onTap: () async {
-                            // 削除しますか？って聞いて、はいだったら削除
-                            await showConfirmDialog(context, books, model);
-                          },
-                        ),
-                      ],
-                    ),
-                  )
-                  .toList();
-              return ListView(
-                children: widgets,
-              );
-            }),
-          ),
-          floatingActionButton:
-              Consumer<HomePageModel>(builder: (context, model, child) {
-            return FloatingActionButton(
-              onPressed: () async {
-                // 画面遷移
-                //print('add-email' + _email);
-                final bool? added = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AddBookPage(_email),
-                    fullscreenDialog: true,
-                  ),
-                );
-
-                if (added != null && added) {
-                  final snackBar = SnackBar(
-                    backgroundColor: Colors.green,
-                    content: Text('日誌を追加しました'),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                if (books == null) {
+                  return CircularProgressIndicator();
                 }
 
-                model.fetchReportList(_today, _email);
-              },
-              tooltip: 'Increment',
-              child: Icon(Icons.add),
-            );
-          }),
-        ));
+                final List<Widget> widgets = books
+                    .map(
+                      (books) => Slidable(
+                        actionPane: SlidableDrawerActionPane(),
+                        child: ListTile(
+                            onTap: () async {
+                              //編集
+                              final String? title = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EditBookPage(books),
+                                ),
+                              );
+
+                              if (title != null) {
+                                final snackBar = SnackBar(
+                                  backgroundColor: Colors.green,
+                                  content: Text('$titleを編集しました'),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              }
+                              model.fetchReportList();
+                            },
+                            onLongPress: () async {
+                              final String? title = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      BookListPage(_email, books.type),
+                                ),
+                              );
+                            },
+                            leading: _iconset(books.type),
+                            title: Text(books.contets),
+                            subtitle: Text(books.diary),
+                            trailing: Icon(Icons.list_alt_outlined)),
+                        secondaryActions: <Widget>[
+                          IconSlideAction(
+                            caption: '編集',
+                            color: Colors.black45,
+                            icon: Icons.edit,
+                            onTap: () async {
+                              // 編集画面に遷移
+                              final String? title = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EditBookPage(books),
+                                ),
+                              );
+
+                              if (title != null) {
+                                final snackBar = SnackBar(
+                                  backgroundColor: Colors.green,
+                                  content: Text('$titleを編集しました'),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              }
+
+                              model.fetchReportList();
+                            },
+                          ),
+                          IconSlideAction(
+                            caption: '削除',
+                            color: Colors.red,
+                            icon: Icons.delete,
+                            onTap: () async {
+                              // 削除しますか？って聞いて、はいだったら削除
+                              await showConfirmDialog(context, books, model);
+                            },
+                          ),
+                        ],
+                      ),
+                    )
+                    .toList();
+                return ListView(
+                  children: widgets,
+                );
+              }),
+            ),
+            floatingActionButton:
+                Consumer<HomePageModel>(builder: (context, model, child) {
+              return FloatingActionButton(
+                onPressed: () async {
+                  // 画面遷移
+                  //print('add-email' + _email);
+                  final bool? added = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddBookPage(_email),
+                      fullscreenDialog: true,
+                    ),
+                  );
+
+                  if (added != null && added) {
+                    final snackBar = SnackBar(
+                      backgroundColor: Colors.green,
+                      content: Text('日誌を追加しました'),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }
+
+                  model.fetchReportList();
+                },
+                tooltip: 'Increment',
+                child: Icon(Icons.add),
+              );
+            }),
+          );
+        }));
   }
 
   Future showConfirmDialog(
@@ -247,7 +246,7 @@ class ReportHomePage extends StatelessWidget {
                   backgroundColor: Colors.red,
                   content: Text('${book.reportdate}を削除しました'),
                 );
-                model.fetchReportList(_today, _email);
+                model.fetchReportList();
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),
