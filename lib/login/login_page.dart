@@ -87,7 +87,7 @@ class LoginPage extends StatelessWidget {
                       TextButton(
                         onPressed: () async {
                           model.logout();
-                          Navigator.of(context).pop(context);
+                          Navigator.of(context).pop('NA');
                         },
                         child: Text('ログアウト'),
                       ),

@@ -68,6 +68,7 @@ class ReportHomePage extends StatelessWidget {
                     IconButton(
                       onPressed: () async {
                         // ログイン画面表示
+
                         final String email = await Navigator.push(
                           context,
                           MaterialPageRoute(

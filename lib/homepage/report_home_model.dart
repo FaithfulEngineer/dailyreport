@@ -12,8 +12,6 @@ import 'package:intl/intl.dart';
 
 class HomePageModel extends ChangeNotifier {
   List<Book>? books;
-  List<Setting>? settings;
-  List<HomePage>? homepages;
   bool chgflg = false;
   bool flag = false;
 
@@ -78,7 +76,6 @@ class HomePageModel extends ChangeNotifier {
 
     this.books = books;
 
-    this.homepages = homepages;
     notifyListeners();
   }
 
