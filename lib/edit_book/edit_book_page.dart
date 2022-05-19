@@ -31,7 +31,6 @@ class EditBookPage extends StatelessWidget {
                       hintText: '日付',
                     ),
                     onChanged: (text) {
-                      //★日付チェックが必要
                       //チェンジはテキストを直接変更した場合しか反応しなさそう
                       model.date = setDate;
                     },

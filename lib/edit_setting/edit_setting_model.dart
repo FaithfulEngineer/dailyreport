@@ -3,7 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class EditSettingModel extends ChangeNotifier {
+  //final List<Setting>? setting;
   final Setting setting;
+
   EditSettingModel(this.setting) {
     typeController.text = setting.type;
     contentsController.text = setting.contents;

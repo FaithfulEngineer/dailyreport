@@ -8,6 +8,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
+String _calltype = '1';
+
 class BookListPage extends StatelessWidget {
   final String email;
   final String type;
@@ -26,7 +28,7 @@ class BookListPage extends StatelessWidget {
                   final String? title = await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SettingListPage(email),
+                      builder: (context) => SettingListPage(email, _calltype),
                     ),
                   );
                 },

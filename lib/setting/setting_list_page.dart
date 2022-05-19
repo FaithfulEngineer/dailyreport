@@ -10,7 +10,9 @@ import 'package:provider/provider.dart';
 
 class SettingListPage extends StatelessWidget {
   final String email;
-  SettingListPage(this.email);
+  final String calledtype; //1:setting add or edit 2:homepage
+
+  SettingListPage(this.email, this.calledtype);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class SettingListPage extends StatelessWidget {
       return Future.value(false);
     };
     return ChangeNotifierProvider<SettingListModel>(
-      create: (_) => SettingListModel()..fetchSettingList(),
+      create: (_) => SettingListModel()..fetchSettingList(email),
       child: Scaffold(
         appBar: AppBar(
           title: Text('設定一覧'),
@@ -40,10 +42,34 @@ class SettingListPage extends StatelessWidget {
                     child: ListTile(
                       leading: _iconset(Setting.type),
                       title: Text(Setting.contents),
-                      onTap: () {
-                        Navigator.of(context).pop(Setting.type +
-                            ':' +
-                            Setting.contents); //type:contents
+                      onTap: () async {
+                        //呼ばれた画面によって切替
+                        if (calledtype == '1') {
+                          final String? title = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  EditSettingPage(Setting, Setting.type),
+                            ),
+                          );
+
+                          if (title != null) {
+                            final snackBar = SnackBar(
+                              backgroundColor: Colors.green,
+                              content: Text('$titleを編集しました'),
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
+                          model.fetchSettingList(email);
+                        } else {
+                          //HOMEpageから呼ばれたらこっちが動くこと
+                          //print("引数" + calledtype);
+                          Navigator.of(context).pop(Setting.type +
+                              ':' +
+                              Setting.contents); //type:contents
+
+                        }
                       },
                     ),
                     secondaryActions: <Widget>[
@@ -57,7 +83,8 @@ class SettingListPage extends StatelessWidget {
                           final String? title = await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => EditSettingPage(Setting),
+                              builder: (context) =>
+                                  EditSettingPage(Setting, Setting.type),
                             ),
                           );
 
@@ -70,7 +97,7 @@ class SettingListPage extends StatelessWidget {
                                 .showSnackBar(snackBar);
                           }
 
-                          model.fetchSettingList();
+                          model.fetchSettingList(email);
                         },
                       ),
                       IconSlideAction(
@@ -112,7 +139,7 @@ class SettingListPage extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               }
 
-              model.fetchSettingList();
+              model.fetchSettingList(email);
             },
             tooltip: 'Increment',
             child: Icon(Icons.add),
@@ -149,7 +176,7 @@ class SettingListPage extends StatelessWidget {
                   backgroundColor: Colors.red,
                   content: Text('${setting.contents}を削除しました'),
                 );
-                model.fetchSettingList();
+                model.fetchSettingList(email);
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),
@@ -195,7 +222,7 @@ class SettingListPage extends StatelessWidget {
         return Icon(Icons.report, size: 64, color: Colors.black);
         break;
       case '12':
-        return Icon(Icons.email, size: 64, color: Colors.black);
+        return Icon(Icons.camera, size: 64, color: Colors.black);
         break;
       default:
         return Icon(Icons.stop, size: 64, color: Colors.red);

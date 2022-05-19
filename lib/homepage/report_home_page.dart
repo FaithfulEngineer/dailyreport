@@ -17,11 +17,11 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
-String _today = '0';
 int _idx = 0;
 String _email = 'NA';
-DateTime _dtoday = DateTime.now();
-String _headdate = DateFormat.MMMEd('ja').format(_dtoday);
+String _calltype = '1';
+//DateTime _dtoday = DateTime.now();
+//String _headdate = DateFormat.MMMEd('ja').format(_dtoday);
 
 class ReportHomePage extends StatelessWidget {
   @override
@@ -33,19 +33,26 @@ class ReportHomePage extends StatelessWidget {
 
           return Scaffold(
             appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(100),
+              preferredSize: const Size.fromHeight(70),
               child: AppBar(
-                title: Text(_headdate),
+                title: Text(DateFormat.MMMEd('ja').format(model.now!)),
                 backgroundColor: (_email == 'NA') ? Colors.orange : Colors.blue,
                 actions: [
                   IconButton(
                       onPressed: () async {
                         if (_email != 'NA') {
-                          _idx++;
+                          _idx = 0;
                           model.setday(_idx);
-                          _today = _idx.toString();
-                          _dtoday = _dtoday.add(Duration(days: 1));
-                          _headdate = DateFormat.MMMEd('ja').format(_dtoday);
+                        }
+
+                        model.fetchReportList();
+                      },
+                      icon: Icon(Icons.home)),
+                  IconButton(
+                      onPressed: () async {
+                        if (_email != 'NA') {
+                          _idx--;
+                          model.setday(_idx);
                         }
 
                         model.fetchReportList();
@@ -54,11 +61,8 @@ class ReportHomePage extends StatelessWidget {
                   IconButton(
                       onPressed: () async {
                         if (_email != 'NA') {
-                          _idx--;
+                          _idx++;
                           model.setday(_idx);
-                          _today = _idx.toString();
-                          _dtoday = _dtoday.add(Duration(days: -1));
-                          _headdate = DateFormat.MMMEd('ja').format(_dtoday);
                         }
                         model.fetchReportList();
                       },
@@ -86,10 +90,12 @@ class ReportHomePage extends StatelessWidget {
                   IconButton(
                       onPressed: () async {
                         //個人設定画面表示
+                        _calltype = '1';
                         final String? title = await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SettingListPage(_email),
+                            builder: (context) =>
+                                SettingListPage(_email, _calltype),
                           ),
                         );
                       },
@@ -230,7 +236,7 @@ class ReportHomePage extends StatelessWidget {
       builder: (_) {
         return AlertDialog(
           title: Text("削除の確認"),
-          content: Text("『${book.reportdate}』を削除しますか？"),
+          content: Text("『${book.diary}』を削除しますか？"),
           actions: [
             TextButton(
               child: Text("いいえ"),
@@ -240,11 +246,20 @@ class ReportHomePage extends StatelessWidget {
               child: Text("はい"),
               onPressed: () async {
                 // modelで削除
-                await model.delete(book);
-                Navigator.pop(context);
+                try {
+                  await model.delete(book);
+                  Navigator.of(context).pop(true);
+                } catch (e) {
+                  final snackBar = SnackBar(
+                    backgroundColor: Colors.red,
+                    content: Text(e.toString()),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+
                 final snackBar = SnackBar(
-                  backgroundColor: Colors.red,
-                  content: Text('${book.reportdate}を削除しました'),
+                  backgroundColor: Colors.orange,
+                  content: Text('${book.diary}を削除しました'),
                 );
                 model.fetchReportList();
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -294,7 +309,7 @@ Widget _iconset(String index) {
       return Icon(Icons.report, size: 64, color: Colors.black);
       break;
     case '12':
-      return Icon(Icons.email, size: 64, color: Colors.black);
+      return Icon(Icons.camera, size: 64, color: Colors.black);
       break;
     default:
       return Icon(Icons.stop, size: 64, color: Colors.red);

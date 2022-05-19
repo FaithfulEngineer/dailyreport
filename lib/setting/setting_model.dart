@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 
 class SettingListModel extends ChangeNotifier {
   List<Setting>? settings;
+  String? email;
 
-  void fetchSettingList() async {
-    final QuerySnapshot snapshot =
-        await FirebaseFirestore.instance.collection('setting').get();
-    //検索条件追加　emailで抽出
+  void fetchSettingList(String email) async {
+    final QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('setting')
+        .where('email', isEqualTo: email)
+        .get();
 
     final List<Setting> settings =
         snapshot.docs.map((DocumentSnapshot document) {
@@ -33,5 +35,10 @@ class SettingListModel extends ChangeNotifier {
         .collection('setting')
         .doc(setting.id)
         .delete();
+  }
+
+  void setemail(String email) {
+    this.email = email;
+    notifyListeners();
   }
 }

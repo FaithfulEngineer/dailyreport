@@ -8,6 +8,7 @@ import '/setting/setting_list_page.dart';
 DateTime? _selectedDate;
 DateTime setDate = DateTime.now();
 TextEditingController _textEditingController = TextEditingController();
+String _calltype = '2';
 
 class AddBookPage extends StatelessWidget {
   final String email;
@@ -47,10 +48,12 @@ class AddBookPage extends StatelessWidget {
                   IconButton(
                     icon: _iconset(model.type),
                     onPressed: () async {
+                      _calltype = '2';
                       final String? title = await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SettingListPage(email),
+                          builder: (context) =>
+                              SettingListPage(email, _calltype),
                         ),
                       );
 
@@ -139,7 +142,7 @@ class AddBookPage extends StatelessWidget {
         return Icon(Icons.report, size: 64, color: Colors.black);
         break;
       case '12':
-        return Icon(Icons.email, size: 64, color: Colors.black);
+        return Icon(Icons.camera, size: 64, color: Colors.black);
         break;
       default:
         return Icon(Icons.ac_unit, size: 32, color: Colors.red);

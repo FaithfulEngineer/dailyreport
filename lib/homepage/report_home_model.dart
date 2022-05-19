@@ -59,58 +59,17 @@ class HomePageModel extends ChangeNotifier {
     notifyListeners();
   }
 
-//検索日付の設定(未来は明々後日まで、過去は6日間）
+//検索日付の設定
   void setday(int idx) {
     var _now = DateTime.now();
-    switch (idx) {
-      case 1:
-        this.now = _now.add(Duration(days: 1)); // day : '+1' => tommorow
-        notifyListeners();
-        break;
-      case 2:
-        this.now =
-            _now.add(Duration(days: 2)); // day : '+2' => the day after tommorow
-        notifyListeners();
-        break;
-      case 3:
-        this.now = _now.add(Duration(days: 3)); // day : '+3' => more
-        notifyListeners();
-        break;
-      case -1:
-        this.now = _now.add(Duration(days: -1)); // day : '-1' => yesterday
-        notifyListeners();
-        break;
-      case -2:
-        this.now = _now
-            .add(Duration(days: -2)); // day : '-2' => the day before yesterday
-        notifyListeners();
-        break;
-      case -3:
-        this.now = _now.add(Duration(days: -3)); // day : '-3' => more
-        notifyListeners();
-        break;
-      case -4:
-        this.now = _now.add(Duration(days: -4)); // day : '-4' => more
-        notifyListeners();
-        break;
-      case -5:
-        this.now = _now.add(Duration(days: -5)); // day : '-5' => more
-        notifyListeners();
-        break;
-      case -6:
-        this.now = _now.add(Duration(days: -6)); // day : '-5' => more
-        notifyListeners();
-        break;
-
-      default:
-        this.now = _now; // day : '0' => today
-        notifyListeners();
-
-        break;
-    }
+    this.now = _now.add(Duration(days: idx));
+    notifyListeners();
   }
 
   Future delete(Book book) {
-    return FirebaseFirestore.instance.collection('books').doc(book.id).delete();
+    return FirebaseFirestore.instance
+        .collection('report')
+        .doc(book.id)
+        .delete();
   }
 }

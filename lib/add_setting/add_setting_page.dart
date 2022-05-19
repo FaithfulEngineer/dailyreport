@@ -21,17 +21,51 @@ class AddSettingPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  TextField(
-                    enabled: false,
-                    controller: model.typeController,
-                    decoration: InputDecoration(
-                      hintText: 'アイコンを選択',
-                    ),
-                    //controller: _textEditingController,
-                    onChanged: (text) {
-                      model.type = text;
+                  ElevatedButton.icon(
+                    onPressed: () async {
+                      final String? title = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Iconsetting(),
+                        ),
+                      );
+                      if (title != null) {
+                        model.typeController.text = title;
+                        model.setType(title);
+                        model.email = email;
+                      }
                     },
+                    icon: _iconset(model.type),
+                    label: Text('アイコン'),
+                    style: ElevatedButton.styleFrom(primary: Colors.grey),
                   ),
+
+//                  IconButton(
+//                    icon: _iconset(model.type),
+//                    onPressed: () async {
+//                      final String? title = await Navigator.push(
+//                        context,
+//                        MaterialPageRoute(
+//                          builder: (context) => Iconsetting(),
+//                        ),
+//                      );
+//                      if (title != null) {
+//                        model.typeController.text = title;
+//                        model.setType(title);
+//                        model.email = email;
+//                      }
+//                    },
+//                  ),
+//                  TextField(
+//                    enabled: false,
+//                    controller: model.typeController,
+//                    decoration: InputDecoration(
+//                    //  hintText: 'アイコンを選択',
+//                    ),
+//                    onChanged: (text) {
+//                      model.type = text;
+//                    },
+//                  ),
                   SizedBox(
                     height: 8,
                   ),
@@ -48,22 +82,6 @@ class AddSettingPage extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 12,
-                  ),
-                  IconButton(
-                    icon: _iconset(model.type),
-                    onPressed: () async {
-                      final String? title = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Iconsetting(),
-                        ),
-                      );
-                      if (title != null) {
-                        model.typeController.text = title;
-                        model.setType(title);
-                        model.email = email;
-                      }
-                    },
                   ),
                   SizedBox(
                     height: 24,
@@ -129,7 +147,7 @@ class AddSettingPage extends StatelessWidget {
         return Icon(Icons.report, size: 64, color: Colors.black);
         break;
       case '12':
-        return Icon(Icons.email, size: 64, color: Colors.black);
+        return Icon(Icons.camera, size: 64, color: Colors.black);
         break;
       default:
         return Icon(Icons.ac_unit, size: 32, color: Colors.red);
