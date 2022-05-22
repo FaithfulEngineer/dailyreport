@@ -96,7 +96,7 @@ class BookListPage extends StatelessWidget {
             );
           }),
         ),
-        floatingActionButton:
+/*         floatingActionButton:
             Consumer<BookListModel>(builder: (context, model, child) {
           return FloatingActionButton(
             onPressed: () async {
@@ -104,7 +104,8 @@ class BookListPage extends StatelessWidget {
               final bool? added = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddBookPage(email),
+                  builder: (context) =>
+                      AddBookPage(email, type, DateTime.now()), //必ず今日になる
                   fullscreenDialog: true,
                 ),
               );
@@ -123,6 +124,7 @@ class BookListPage extends StatelessWidget {
             child: Icon(Icons.add),
           );
         }),
+ */
       ),
     );
   }

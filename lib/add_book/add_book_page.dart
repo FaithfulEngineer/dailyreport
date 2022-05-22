@@ -11,13 +11,20 @@ TextEditingController _textEditingController = TextEditingController();
 String _calltype = '2';
 
 class AddBookPage extends StatelessWidget {
+  final Book book;
   final String email;
-  AddBookPage(this.email);
+  final DateTime date;
+  bool _chgflg = false;
+
+  AddBookPage(this.email, this.book, this.date) {
+    _textEditingController.text =
+        "${date.year.toString()}年${date.month.toString()}月${date.day.toString()}日";
+  }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AddBookModel>(
-      create: (_) => AddBookModel(),
+      create: (_) => AddBookModel(book),
       child: Scaffold(
         appBar: AppBar(
           title: Text('日誌を追加'),
@@ -29,23 +36,27 @@ class AddBookPage extends StatelessWidget {
               child: Column(
                 children: [
                   TextField(
+                    //日付表示欄
                     decoration: InputDecoration(
                       hintText: '日付',
                     ),
                     controller: _textEditingController,
                     onChanged: (text) {
-                      model.reportdated = setDate;
+                      // model.reportdated = setDate;
                     },
                   ),
                   IconButton(
+                      //日付選択ボタン
                       onPressed: () {
                         _selectDate(context);
+                        model.reportdated = setDate;
                       },
                       icon: Icon(Icons.calendar_month, size: 32)),
                   SizedBox(
                     height: 24,
                   ),
                   IconButton(
+                    //アイコン選択
                     icon: _iconset(model.type),
                     onPressed: () async {
                       _calltype = '2';
@@ -68,6 +79,7 @@ class AddBookPage extends StatelessWidget {
                     },
                   ),
                   TextField(
+                    //日誌入力欄
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
                     decoration: InputDecoration(
@@ -82,8 +94,10 @@ class AddBookPage extends StatelessWidget {
                     height: 16,
                   ),
                   ElevatedButton(
+                    //追加ボタン
                     onPressed: () async {
-                      // 追加の処理
+                      if (_chgflg == false) model.setDate(date);
+
                       try {
                         await model.addBook();
                         Navigator.of(context).pop(true);
@@ -108,31 +122,31 @@ class AddBookPage extends StatelessWidget {
 
   Widget _iconset(String? index) {
     switch (index) {
-      case '1':
+      case '01':
         return Icon(Icons.account_circle, size: 64, color: Colors.black);
         break;
-      case '2':
+      case '02':
         return Icon(Icons.info, size: 64, color: Colors.black);
         break;
-      case '3':
+      case '03':
         return Icon(Icons.check_circle, size: 64, color: Colors.black);
         break;
-      case '4':
+      case '04':
         return Icon(Icons.article, size: 64, color: Colors.black);
         break;
-      case '5':
+      case '05':
         return Icon(Icons.schedule, size: 64, color: Colors.black);
         break;
-      case '6':
+      case '06':
         return Icon(Icons.event, size: 64, color: Colors.black);
         break;
-      case '7':
+      case '07':
         return Icon(Icons.thumb_up, size: 64, color: Colors.black);
         break;
-      case '8':
+      case '08':
         return Icon(Icons.sick, size: 64, color: Colors.black);
         break;
-      case '9':
+      case '09':
         return Icon(Icons.mail, size: 64, color: Colors.black);
         break;
       case '10':
@@ -149,20 +163,21 @@ class AddBookPage extends StatelessWidget {
         break;
     }
   }
-}
 
-_selectDate(BuildContext context) async {
-  final newSelectedDate = await showDatePicker(
-    context: context,
-    initialDate: _selectedDate ?? DateTime.now(),
-    firstDate: DateTime(2000),
-    lastDate: DateTime(2040),
-  );
+  _selectDate(BuildContext context) async {
+    final newSelectedDate = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate ?? DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2040),
+    );
 
-  if (newSelectedDate != null) {
-    _selectedDate = newSelectedDate;
-    setDate = newSelectedDate;
-    _textEditingController.text =
-        "${setDate.year.toString()}年${setDate.month.toString()}月${setDate.day.toString()}日";
+    if (newSelectedDate != null) {
+      _selectedDate = newSelectedDate;
+      setDate = newSelectedDate;
+      _chgflg = true;
+      _textEditingController.text =
+          "${setDate.year.toString()}年${setDate.month.toString()}月${setDate.day.toString()}日";
+    }
   }
 }

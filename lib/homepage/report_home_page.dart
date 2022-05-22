@@ -20,6 +20,13 @@ import 'package:intl/intl.dart';
 int _idx = 0;
 String _email = 'NA';
 String _calltype = '1';
+Color _colorgray = Colors.grey;
+Color _colorbluck = Colors.black;
+Color _colorblue = Colors.blue;
+Color _colorblue2 = Colors.blue.shade900;
+Color _colororenge = Colors.orange;
+Color? _iconColor;
+
 //DateTime _dtoday = DateTime.now();
 //String _headdate = DateFormat.MMMEd('ja').format(_dtoday);
 
@@ -36,9 +43,10 @@ class ReportHomePage extends StatelessWidget {
               preferredSize: const Size.fromHeight(70),
               child: AppBar(
                 title: Text(DateFormat.MMMEd('ja').format(model.now!)),
-                backgroundColor: (_email == 'NA') ? Colors.orange : Colors.blue,
+                backgroundColor: (_email == 'NA') ? _colororenge : _colorblue,
                 actions: [
                   IconButton(
+                      //ホームボタン
                       onPressed: () async {
                         if (_email != 'NA') {
                           _idx = 0;
@@ -49,6 +57,7 @@ class ReportHomePage extends StatelessWidget {
                       },
                       icon: Icon(Icons.home)),
                   IconButton(
+                      //一日戻る
                       onPressed: () async {
                         if (_email != 'NA') {
                           _idx--;
@@ -59,6 +68,7 @@ class ReportHomePage extends StatelessWidget {
                       },
                       icon: Icon(Icons.arrow_back)),
                   IconButton(
+                      //一日進む
                       onPressed: () async {
                         if (_email != 'NA') {
                           _idx++;
@@ -68,9 +78,8 @@ class ReportHomePage extends StatelessWidget {
                       },
                       icon: Icon(Icons.arrow_forward)),
                   IconButton(
+                    //ログイン
                     onPressed: () async {
-                      // ログイン画面表示
-
                       final String email = await Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -88,8 +97,8 @@ class ReportHomePage extends StatelessWidget {
                     icon: Icon(Icons.person),
                   ),
                   IconButton(
+                      //個人設定画面表示
                       onPressed: () async {
-                        //個人設定画面表示
                         _calltype = '1';
                         final String? title = await Navigator.push(
                           context,
@@ -118,22 +127,47 @@ class ReportHomePage extends StatelessWidget {
                         actionPane: SlidableDrawerActionPane(),
                         child: ListTile(
                             onTap: () async {
-                              //編集
-                              final String? title = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => EditBookPage(books),
-                                ),
-                              );
-
-                              if (title != null) {
-                                final snackBar = SnackBar(
-                                  backgroundColor: Colors.green,
-                                  content: Text('$titleを編集しました'),
+                              if (books.diary != '') {
+                                //編集モード
+                                final String? title = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditBookPage(books),
+                                  ),
                                 );
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar);
+
+                                if (title != null) {
+                                  final snackBar = SnackBar(
+                                    backgroundColor: Colors.green,
+                                    content: Text('$titleを編集しました'),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                }
+                              } else {
+                                //追加モード
+                                DateTime? _now = model.now;
+                                if (_now == null) _now = DateTime.now();
+
+                                final bool? added = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        AddBookPage(_email, books, _now!),
+                                    fullscreenDialog: true,
+                                  ),
+                                );
+
+                                if (added != null && added) {
+                                  final snackBar = SnackBar(
+                                    backgroundColor: Colors.green,
+                                    content: Text('日誌を追加しました'),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                }
                               }
+
                               model.fetchReportList();
                             },
                             onLongPress: () async {
@@ -145,7 +179,11 @@ class ReportHomePage extends StatelessWidget {
                                 ),
                               );
                             },
-                            leading: _iconset(books.type),
+                            textColor:
+                                (books.diary != '') ? _colorblue2 : _colorgray,
+                            iconColor:
+                                (books.diary != '') ? _colorblue2 : _colorgray,
+                            leading: _iconset(books.type, 64),
                             title: Text(books.contets),
                             subtitle: Text(books.diary),
                             trailing: Icon(Icons.list_alt_outlined)),
@@ -193,7 +231,7 @@ class ReportHomePage extends StatelessWidget {
                 );
               }),
             ),
-            floatingActionButton:
+/*             floatingActionButton:
                 Consumer<HomePageModel>(builder: (context, model, child) {
               return FloatingActionButton(
                 onPressed: () async {
@@ -202,7 +240,7 @@ class ReportHomePage extends StatelessWidget {
                   final bool? added = await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AddBookPage(_email),
+                      builder: (context) => AddBookPage(,_email),
                       fullscreenDialog: true,
                     ),
                   );
@@ -220,7 +258,7 @@ class ReportHomePage extends StatelessWidget {
                 tooltip: 'Increment',
                 child: Icon(Icons.add),
               );
-            }),
+            }            ), */
           );
         }));
   }
@@ -272,44 +310,44 @@ class ReportHomePage extends StatelessWidget {
   }
 }
 
-Widget _iconset(String index) {
+Widget _iconset(String index, double _size) {
   switch (index) {
-    case '1':
-      return Icon(Icons.account_circle, size: 64, color: Colors.black);
+    case '01':
+      return Icon(Icons.account_circle, size: _size);
       break;
-    case '2':
-      return Icon(Icons.info, size: 64, color: Colors.black);
+    case '02':
+      return Icon(Icons.info, size: _size);
       break;
-    case '3':
-      return Icon(Icons.check_circle, size: 64, color: Colors.black);
+    case '03':
+      return Icon(Icons.check_circle, size: _size);
       break;
-    case '4':
-      return Icon(Icons.article, size: 64, color: Colors.black);
+    case '04':
+      return Icon(Icons.article, size: _size);
       break;
-    case '5':
-      return Icon(Icons.schedule, size: 64, color: Colors.black);
+    case '05':
+      return Icon(Icons.schedule, size: _size);
       break;
-    case '6':
-      return Icon(Icons.event, size: 64, color: Colors.black);
+    case '06':
+      return Icon(Icons.event, size: _size);
       break;
-    case '7':
-      return Icon(Icons.thumb_up, size: 64, color: Colors.black);
+    case '07':
+      return Icon(Icons.thumb_up, size: _size);
       break;
-    case '8':
-      return Icon(Icons.sick, size: 64, color: Colors.black);
+    case '08':
+      return Icon(Icons.sick, size: _size);
       break;
-    case '9':
-      return Icon(Icons.mail, size: 64, color: Colors.black);
+    case '09':
+      return Icon(Icons.mail, size: _size);
 
       break;
     case '10':
-      return Icon(Icons.flag, size: 64, color: Colors.black);
+      return Icon(Icons.flag, size: _size);
       break;
     case '11':
-      return Icon(Icons.report, size: 64, color: Colors.black);
+      return Icon(Icons.report, size: _size);
       break;
     case '12':
-      return Icon(Icons.camera, size: 64, color: Colors.black);
+      return Icon(Icons.camera, size: _size);
       break;
     default:
       return Icon(Icons.stop, size: 64, color: Colors.red);

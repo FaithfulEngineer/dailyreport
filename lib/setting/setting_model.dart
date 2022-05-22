@@ -23,7 +23,9 @@ class SettingListModel extends ChangeNotifier {
     }).toList();
 
     settings.sort((a, b) {
-      return a.type[0].compareTo(b.type[0]);
+      int ret = a.type[0].compareTo(b.type[0]);
+      if (ret != 0) return ret;
+      return a.type[1].compareTo(b.type[1]);
     });
 
     this.settings = settings;

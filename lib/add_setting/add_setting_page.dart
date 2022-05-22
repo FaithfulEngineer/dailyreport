@@ -113,31 +113,31 @@ class AddSettingPage extends StatelessWidget {
 
   Widget _iconset(String? index) {
     switch (index) {
-      case '1':
+      case '01':
         return Icon(Icons.account_circle, size: 64, color: Colors.black);
         break;
-      case '2':
+      case '02':
         return Icon(Icons.info, size: 64, color: Colors.black);
         break;
-      case '3':
+      case '03':
         return Icon(Icons.check_circle, size: 64, color: Colors.black);
         break;
-      case '4':
+      case '04':
         return Icon(Icons.article, size: 64, color: Colors.black);
         break;
-      case '5':
+      case '05':
         return Icon(Icons.schedule, size: 64, color: Colors.black);
         break;
-      case '6':
+      case '06':
         return Icon(Icons.event, size: 64, color: Colors.black);
         break;
-      case '7':
+      case '07':
         return Icon(Icons.thumb_up, size: 64, color: Colors.black);
         break;
-      case '8':
+      case '08':
         return Icon(Icons.sick, size: 64, color: Colors.black);
         break;
-      case '9':
+      case '09':
         return Icon(Icons.mail, size: 64, color: Colors.black);
         break;
       case '10':

@@ -1,15 +1,23 @@
+import '/domain/book.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 class AddBookModel extends ChangeNotifier {
+  final Book book;
+
   String? reportdate = DateFormat.yMMMEd('ja').format(DateTime.now());
   String? dairy;
   String? type;
   String? email;
   String? contents;
-  DateTime reportdated = DateTime.now();
+  DateTime? reportdated;
+
+  AddBookModel(this.book) {
+    type = book.type;
+    contents = book.contets;
+  }
 
   var typeController = TextEditingController();
 
@@ -30,7 +38,7 @@ class AddBookModel extends ChangeNotifier {
       throw 'emailアドレスが設定されていません';
     }
 
-    //print('更新直前' + email!);
+    //重複チェックはすべきか、日付を変更できなくするとチェックは不要のはず
 
     // firestoreに追加
     await FirebaseFirestore.instance.collection('report').add({
@@ -42,11 +50,13 @@ class AddBookModel extends ChangeNotifier {
     });
   }
 
+  void setDate(DateTime date) {
+    this.reportdated = date;
+    notifyListeners();
+  }
+
   void setType(String type) {
     this.type = type;
     notifyListeners();
   }
 }
-
-
-//日付型に変換

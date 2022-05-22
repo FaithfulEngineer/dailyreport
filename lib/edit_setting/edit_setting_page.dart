@@ -6,8 +6,8 @@ import 'package:dailyreport/setting/icon_select_page.dart';
 
 class EditSettingPage extends StatelessWidget {
   final Setting setting;
-  final String iconNo;
-  EditSettingPage(this.setting, this.iconNo);
+
+  EditSettingPage(this.setting);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,6 @@ class EditSettingPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  _iconset(iconNo, 32),
                   ElevatedButton.icon(
                     onPressed: () async {
                       final String? title = await Navigator.push(
@@ -36,26 +35,16 @@ class EditSettingPage extends StatelessWidget {
                       if (title != null) {
                         model.typeController.text = title;
                         model.setType(title);
-                        //print(iconNo);
-                        //var iconNo = title;
                       }
                     },
                     //icon: _iconset(iconNo),
-                    icon: _iconset(model.type, 64),
-                    label: Text('アイコン'),
-                    style: ElevatedButton.styleFrom(primary: Colors.grey),
-                  ),
-/*                   TextField(
-                    enabled: false,
-                    controller: model.typeController,
-                    decoration: InputDecoration(
-                      hintText: '参考type',
+                    icon: _iconset(model.typeController.text, 64),
+                    label: Text(
+                      'アイコン',
+                      style: TextStyle(color: Colors.black),
                     ),
-                    onChanged: (text) {
-                      model.setType(text);
-                    },
+                    style: ElevatedButton.styleFrom(primary: Colors.white),
                   ),
- */
                   SizedBox(
                     height: 8,
                   ),
@@ -102,8 +91,6 @@ class EditSettingPage extends StatelessWidget {
   }
 
   Widget _iconset(String? index, double size) {
-    print('icon:' + index.toString());
-
     switch (index) {
       case '1':
         return Icon(Icons.account_circle, size: size, color: Colors.black);
