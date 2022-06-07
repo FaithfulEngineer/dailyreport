@@ -7,7 +7,7 @@ class LoginModel extends ChangeNotifier {
 
   String? email;
   String? password;
-
+  bool loginflg = true;
   bool isLoading = false;
 
   void startLoading() {
@@ -30,15 +30,42 @@ class LoginModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool setflg() {
+    if (loginflg)
+      this.loginflg = false;
+    else
+      this.loginflg = true;
+
+    notifyListeners();
+    return this.loginflg;
+  }
+
+  void idlogin() {
+    this.email = titleController.text;
+    if (email == 'NA' || email == "") {
+      throw 'ユーザIDが設定されていません';
+    }
+  }
+
   Future login() async {
     this.email = titleController.text;
     this.password = authorController.text;
 
     if (email != null && password != null) {
       // ログイン
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email!, password: password!);
-
+      try {
+        await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: email!, password: password!);
+      } on FirebaseAuthException catch (e) {
+        switch (e.code) {
+          case 'user-not-found':
+            throw 'emailが登録されていません';
+          case 'wrong-password':
+            throw 'パスワードが違います';
+          default:
+            throw 'ログインできません(' + e.code.toString() + ')';
+        }
+      }
       final currentUser = FirebaseAuth.instance.currentUser;
       final uid = currentUser!.uid;
     }

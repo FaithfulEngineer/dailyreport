@@ -19,6 +19,7 @@ dependencies:
   flutter_slidable: ^0.6.0
   intl: ^0.17.0
   firebase_auth: ^3.3.17
+  share_plus: ^4.0.4
 
 
 dev_dependencies:

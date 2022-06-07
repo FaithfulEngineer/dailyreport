@@ -17,7 +17,9 @@ class EditBookPage extends StatelessWidget {
       create: (_) => EditBookModel(book),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('日誌を編集'),
+          title: (book.type == "1")
+              ? Text('${book.contets}を編集')
+              : Text('${book.contets}(${book.unit})を編集'),
         ),
         body: Center(
           child: Consumer<EditBookModel>(builder: (context, model, child) {
@@ -25,39 +27,64 @@ class EditBookPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
+//日付項目は表示のみのとした。
                   TextField(
                     controller: model.dateController,
                     decoration: InputDecoration(
                       hintText: '日付',
                     ),
+                    enabled: false,
                     onChanged: (text) {
-                      //チェンジはテキストを直接変更した場合しか反応しなさそう
+                      //チェンジはテキストを直接変更した場合しか実行されない。
                       model.date = setDate;
                     },
                   ),
-                  IconButton(
+/*                   IconButton(
                       onPressed: () async {
                         await _selectDate(context);
                         model.dateController.text = _textEditingController.text;
                       },
                       icon: Icon(Icons.calendar_today)),
+ */
                   SizedBox(
                     height: 8,
                   ),
+
                   TextField(
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
+                    cursorColor: Colors.black,
                     controller: model.dairyController,
                     decoration: InputDecoration(
-                      hintText: '日誌',
+                      hintText: (book.style != '2') ? '日誌' : '数値:${book.unit}',
                     ),
                     onChanged: (text) {
+                      if (book.style == '2') {
+                        if (int.tryParse(text) != null) {
+                          model.dairy = text;
+                        } else {
+                          text = '';
+                        }
+                      } else {
+                        model.dairy = text;
+                      }
+
                       model.setDairy(text);
                     },
                   ),
                   SizedBox(
                     height: 16,
                   ),
+
+/*                   TextField(
+                    controller: model.styleController,
+                    enabled: false,
+                  ), //必要？
+                  TextField(
+                    controller: model.unitController,
+                    enabled: false,
+                  ), //必要？
+ */
                   ElevatedButton(
                     onPressed: model.isUpdated()
                         ? () async {
@@ -88,6 +115,7 @@ class EditBookPage extends StatelessWidget {
   }
 }
 
+//datepicker日付入力無くなると不要になる。
 _selectDate(BuildContext context) async {
   final newSelectedDate = await showDatePicker(
     context: context,

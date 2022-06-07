@@ -7,16 +7,21 @@ import 'package:intl/intl.dart';
 class AddBookModel extends ChangeNotifier {
   final Book book;
 
-  String? reportdate = DateFormat.yMMMEd('ja').format(DateTime.now());
+  String? reportdate;
   String? dairy;
   String? type;
   String? email;
   String? contents;
+  String? style;
+  String? unit;
   DateTime? reportdated;
 
   AddBookModel(this.book) {
+    reportdated = book.reoportdated;
     type = book.type;
     contents = book.contets;
+    style = book.style;
+    unit = book.unit;
   }
 
   var typeController = TextEditingController();
@@ -31,14 +36,19 @@ class AddBookModel extends ChangeNotifier {
     }
 
     if (type == null || type == "") {
-      throw '種別（数字）が入力されていません';
+      throw '種別（アイコン）が入力されていません';
+    }
+
+    if (style == null || style == "") {
+      throw 'データ型が入力されていません';
+    }
+    if (style == '2' && (unit == null || unit == '')) {
+      throw 'データ型が数字の場合は単位を必ず入力してください';
     }
 
     if (email == 'NA' || email == "") {
       throw 'emailアドレスが設定されていません';
     }
-
-    //重複チェックはすべきか、日付を変更できなくするとチェックは不要のはず
 
     // firestoreに追加
     await FirebaseFirestore.instance.collection('report').add({
@@ -47,6 +57,9 @@ class AddBookModel extends ChangeNotifier {
       'dairy': dairy,
       'email': email,
       'contents': contents,
+      'style': style,
+      'unit': unit,
+      'delflg': '0',
     });
   }
 

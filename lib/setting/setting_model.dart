@@ -19,7 +19,11 @@ class SettingListModel extends ChangeNotifier {
       final String type = data['type'];
       final String contents = data['contents'];
       final String email = data['email'];
-      return Setting(id, type, contents, email);
+      final String style = data['style'];
+      final String unit = data['unit'];
+      final String plan = data['plan'];
+
+      return Setting(id, type, contents, email, style, unit, plan);
     }).toList();
 
     settings.sort((a, b) {
@@ -32,12 +36,49 @@ class SettingListModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future delete(Setting setting) {
-    return FirebaseFirestore.instance
+  bool today(DateTime _today, String _weekplan) {
+    int _weekday;
+    if (_today.weekday == 7)
+      _weekday = 0;
+    else
+      _weekday = _today.weekday;
+
+    if (_weekplan[_weekday] == '0')
+      return false;
+    else
+      return true;
+  }
+
+  Future delete(Setting setting) async {
+    //retの判定エラーだったらreturn
+    final QuerySnapshot snapshot;
+    snapshot = await FirebaseFirestore.instance
+        .collection('report')
+        .where('email', isEqualTo: setting.email)
+        .where('type', isEqualTo: setting.type)
+        .get();
+    //エラーだったらreturn
+
+    //report コレクションは論理削除する
+    snapshot.docs.forEach((element) async {
+      await FirebaseFirestore.instance
+          .collection('report')
+          .doc(element.id)
+          .update(
+        {
+          'delflg': '1',
+        },
+      );
+    });
+
+    var ret;
+    ret = FirebaseFirestore.instance
         .collection('setting')
         .doc(setting.id)
         .delete();
   }
+
+  void setplan(String _plan) {}
 
   void setemail(String email) {
     this.email = email;

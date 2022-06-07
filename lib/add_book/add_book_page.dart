@@ -6,7 +6,7 @@ import '/setting/setting_list_page.dart';
 //import 'package:dailyreport/setting/icon_select_page.dart';
 
 DateTime? _selectedDate;
-DateTime setDate = DateTime.now();
+//DateTime setDate = DateTime.now();
 TextEditingController _textEditingController = TextEditingController();
 String _calltype = '2';
 
@@ -14,7 +14,7 @@ class AddBookPage extends StatelessWidget {
   final Book book;
   final String email;
   final DateTime date;
-  bool _chgflg = false;
+//  bool _chgflg = false;
 
   AddBookPage(this.email, this.book, this.date) {
     _textEditingController.text =
@@ -27,7 +27,7 @@ class AddBookPage extends StatelessWidget {
       create: (_) => AddBookModel(book),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('日誌を追加'),
+          title: Text('${book.contets}を追加'),
         ),
         body: Center(
           child: Consumer<AddBookModel>(builder: (context, model, child) {
@@ -35,8 +35,8 @@ class AddBookPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
+                  //日付表示欄(表示のみ)
                   TextField(
-                    //日付表示欄
                     decoration: InputDecoration(
                       hintText: '日付',
                     ),
@@ -48,14 +48,17 @@ class AddBookPage extends StatelessWidget {
                   IconButton(
                       //日付選択ボタン
                       onPressed: () {
-                        _selectDate(context);
-                        model.reportdated = setDate;
+                        //  _selectDate(context);
+                        //  model.reportdated = setDate;
                       },
                       icon: Icon(Icons.calendar_month, size: 32)),
+
                   SizedBox(
                     height: 24,
                   ),
-                  IconButton(
+                  _iconset(model.type),
+//アイコンも選択済みのため表示のみ
+/*                   IconButton(
                     //アイコン選択
                     icon: _iconset(model.type),
                     onPressed: () async {
@@ -63,8 +66,8 @@ class AddBookPage extends StatelessWidget {
                       final String? title = await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              SettingListPage(email, _calltype),
+                          builder: (context) => SettingListPage(
+                              email, _calltype, model.reportdated!),
                         ),
                       );
 
@@ -78,16 +81,29 @@ class AddBookPage extends StatelessWidget {
                       }
                     },
                   ),
+ */
                   TextField(
-                    //日誌入力欄
+                    //日誌/数値入力欄
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
                     decoration: InputDecoration(
-                      hintText: '日誌',
+                      hintText: (model.style != '2') ? '日誌' : '数値:${book.unit}',
                     ),
                     onChanged: (text) {
-                      model.dairy = text;
+                      if (model.style == '2') {
+                        //数値型
+                        if (int.tryParse(text) != null) {
+                          model.dairy = text;
+                        } else {
+                          text = '';
+                        }
+                      } else {
+                        //文字列型
+                        model.dairy = text;
+                      }
+                      //数値文字型共通
                       model.email = email;
+                      model.reportdated = date;
                     },
                   ),
                   SizedBox(
@@ -96,7 +112,7 @@ class AddBookPage extends StatelessWidget {
                   ElevatedButton(
                     //追加ボタン
                     onPressed: () async {
-                      if (_chgflg == false) model.setDate(date);
+                      //if (_chgflg == false) model.setDate(date);
 
                       try {
                         await model.addBook();
@@ -164,7 +180,7 @@ class AddBookPage extends StatelessWidget {
     }
   }
 
-  _selectDate(BuildContext context) async {
+  /*  _selectDate(BuildContext context) async {
     final newSelectedDate = await showDatePicker(
       context: context,
       initialDate: _selectedDate ?? DateTime.now(),
@@ -174,10 +190,10 @@ class AddBookPage extends StatelessWidget {
 
     if (newSelectedDate != null) {
       _selectedDate = newSelectedDate;
-      setDate = newSelectedDate;
-      _chgflg = true;
-      _textEditingController.text =
-          "${setDate.year.toString()}年${setDate.month.toString()}月${setDate.day.toString()}日";
+      //setDate = newSelectedDate;
+      //_chgflg = true;
+      //_textEditingController.text =
+      //    "${setDate.year.toString()}年${setDate.month.toString()}月${setDate.day.toString()}日";
     }
-  }
+  } */
 }

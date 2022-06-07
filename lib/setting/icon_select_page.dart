@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import './icon_select_model.dart';
+import '/domain/setting.dart';
 
 Widget _iconset(int index) {
   switch (index) {
@@ -45,7 +48,7 @@ Widget _iconset(int index) {
   }
 }
 
-Widget _iconButtonset(BuildContext context, int index) {
+Widget _iconButtonset(BuildContext context, int index, int onoff) {
   switch (index) {
     case 1:
       return IconButton(
@@ -53,127 +56,182 @@ Widget _iconButtonset(BuildContext context, int index) {
           Icons.account_circle,
         ),
         iconSize: 64,
-        color: Colors.black,
-        onPressed: () => {Navigator.of(context).pop('01')},
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('01');
+          else
+            null;
+        },
       );
-      break;
+
     case 2:
       return IconButton(
         icon: Icon(
           Icons.info,
         ),
         iconSize: 64,
-        color: Colors.black,
-        onPressed: () => {Navigator.of(context).pop('02')},
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('02');
+          else
+            null;
+        },
       );
-      break;
+
     case 3:
       return IconButton(
         icon: Icon(
           Icons.check_circle,
         ),
         iconSize: 64,
-        color: Colors.black,
-        onPressed: () => {Navigator.of(context).pop('03')},
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('03');
+          else
+            null;
+        },
       );
-      break;
     case 4:
       return IconButton(
         icon: Icon(
           Icons.article,
         ),
         iconSize: 64,
-        color: Colors.black,
-        onPressed: () => {Navigator.of(context).pop('04')},
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('04');
+          else
+            null;
+        },
       );
-      break;
     case 5:
       return IconButton(
         icon: Icon(
           Icons.schedule,
         ),
         iconSize: 64,
-        color: Colors.black,
-        onPressed: () => {Navigator.of(context).pop('05')},
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('05');
+          else
+            null;
+        },
       );
-      break;
     case 6:
       return IconButton(
         icon: Icon(
           Icons.event,
         ),
         iconSize: 64,
-        color: Colors.black,
-        onPressed: () => {Navigator.of(context).pop('06')},
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('06');
+          else
+            null;
+        },
       );
-      break;
     case 7:
       return IconButton(
         icon: Icon(
           Icons.thumb_up,
         ),
         iconSize: 64,
-        color: Colors.black,
-        onPressed: () => {Navigator.of(context).pop('07')},
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('07');
+          else
+            null;
+        },
       );
-      break;
     case 8:
       return IconButton(
         icon: Icon(
           Icons.sick,
         ),
         iconSize: 64,
-        color: Colors.black,
-        onPressed: () => {Navigator.of(context).pop('08')},
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('08');
+          else
+            null;
+        },
       );
-      break;
     case 9:
       return IconButton(
         icon: Icon(
           Icons.mail,
         ),
         iconSize: 64,
-        color: Colors.black,
-        onPressed: () => {Navigator.of(context).pop('09')},
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('09');
+          else
+            null;
+        },
       );
-      break;
     case 10:
       return IconButton(
         icon: Icon(
           Icons.flag,
         ),
         iconSize: 64,
-        color: Colors.black,
-        onPressed: () => {Navigator.of(context).pop('10')},
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('10');
+          else
+            null;
+        },
       );
-      break;
     case 11:
       return IconButton(
         icon: Icon(
           Icons.report,
         ),
         iconSize: 64,
-        color: Colors.black,
-        onPressed: () => {Navigator.of(context).pop('11')},
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('11');
+          else
+            null;
+        },
       );
-      break;
     case 12:
       return IconButton(
         icon: Icon(
           Icons.camera,
         ),
         iconSize: 64,
-        color: Colors.black,
-        onPressed: () => {Navigator.of(context).pop('12')},
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('12');
+          else
+            null;
+        },
       );
-      break;
     default:
       return Icon(Icons.stop, size: 64, color: Colors.red);
       break;
   }
 }
 
+bool _flg = false;
+
 class Iconsetting extends StatelessWidget {
+  final String email;
+  Iconsetting(this.email);
+
   @override
   Widget build(BuildContext context) {
     onWillPop:
@@ -181,59 +239,71 @@ class Iconsetting extends StatelessWidget {
       Navigator.of(context).pop();
       return Future.value(false);
     };
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("アイコン設定"),
-      ),
-      body: Column(
-        children: <Widget>[
-          //for (int idx2 = 1; idx2>4; idx2++)...[
-          Container(
-            padding: EdgeInsets.only(top: 32),
+
+    return ChangeNotifierProvider<IconListModel>(
+        create: (_) => IconListModel()..iconfetchList(email),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("アイコン設定"),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              for (int idx = 1; idx < 4; idx++) ...[
-                _iconButtonset(context, idx)
-              ],
-            ],
+          body: Center(
+            child: Consumer<IconListModel>(builder: (context, model, child) {
+              final Setting = model.settings;
+
+              if (Setting == null) {
+                return CircularProgressIndicator();
+              }
+
+              return Column(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top: 32),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      for (int idx = 1; idx < 4; idx++) ...[
+                        _iconButtonset(context, idx, model.GetTypes(idx))
+                      ],
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 32),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      for (int idx = 4; idx < 7; idx++) ...[
+                        _iconButtonset(context, idx, model.GetTypes(idx))
+                      ],
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 32),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      for (int idx = 7; idx < 10; idx++) ...[
+                        _iconButtonset(context, idx, model.GetTypes(idx))
+                      ],
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 32),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      for (int idx = 10; idx < 13; idx++) ...[
+                        _iconButtonset(context, idx, model.GetTypes(idx))
+                      ],
+                    ],
+                  ),
+                ],
+              );
+            }),
           ),
-          Container(
-            padding: EdgeInsets.only(top: 32),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              for (int idx = 4; idx < 7; idx++) ...[
-                _iconButtonset(context, idx)
-              ],
-            ],
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 32),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              for (int idx = 7; idx < 10; idx++) ...[
-                _iconButtonset(context, idx)
-              ],
-            ],
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 32),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              for (int idx = 10; idx < 13; idx++) ...[
-                _iconButtonset(context, idx)
-              ],
-            ],
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import '/login/login_model.dart';
 import '/register/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+bool loginflg = true;
 
 class LoginPage extends StatelessWidget {
   @override
@@ -12,15 +16,30 @@ class LoginPage extends StatelessWidget {
       return Future.value(false);
     };
     return ChangeNotifierProvider<LoginModel>(
-      create: (_) => LoginModel(),
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text('ログイン'),
-        ),
-        body: Center(
-          child: Consumer<LoginModel>(builder: (context, model, child) {
-            return Stack(
+        create: (_) => LoginModel(),
+        child: Consumer<LoginModel>(builder: (context, model, child) {
+          return Scaffold(
+            appBar: AppBar(
+                automaticallyImplyLeading: false,
+                title: (loginflg) ? Text('ログイン') : Text('ユーザＩＤで利用'),
+                actions: [
+                  IconButton(
+                      //アプリ終了
+                      onPressed: () {
+                        loginflg = true;
+                        model.logout();
+                        exit(0);
+                      },
+                      //ユーザボタン
+                      icon: Icon(Icons.exit_to_app)),
+                  IconButton(
+                      onPressed: () {
+                        loginflg = model.setflg();
+                      },
+                      icon: Icon(Icons.person)),
+                ]),
+            body: Center(
+                child: Stack(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -29,8 +48,7 @@ class LoginPage extends StatelessWidget {
                       TextField(
                         controller: model.titleController,
                         decoration: InputDecoration(
-                          hintText: 'Email',
-                        ),
+                            hintText: (loginflg) ? 'Email' : 'ユーザID'),
                         onChanged: (text) {
                           model.setEmail(text);
                         },
@@ -41,8 +59,10 @@ class LoginPage extends StatelessWidget {
                       TextField(
                         controller: model.authorController,
                         obscureText: true,
+                        enabled: (loginflg) ? true : false,
                         decoration: InputDecoration(
-                          hintText: 'パスワード',
+                          hintText:
+                              (loginflg) ? 'パスワード' : 'ユーザIDを入力し利用開始をタップしてください',
                         ),
                         onChanged: (text) {
                           model.setPassword(text);
@@ -53,44 +73,54 @@ class LoginPage extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () async {
-                          model.startLoading();
-
-                          // 追加の処理
-                          try {
-                            await model.login();
-                            Navigator.of(context).pop(model.email);
-                          } catch (e) {
-                            final snackBar = SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text(e.toString()),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          } finally {
-                            model.endLoading();
+                          if (loginflg == true) {
+                            model.startLoading();
+                            try {
+                              await model.login();
+                              Navigator.of(context).pop(model.email);
+                            } catch (e) {
+                              final snackBar = SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text(e.toString()),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            } finally {
+                              model.endLoading();
+                            }
+                          } else {
+                            model.startLoading();
+                            try {
+                              model.idlogin();
+                              Navigator.of(context).pop(model.email);
+                            } catch (e) {
+                              final snackBar = SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text(e.toString()),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            } finally {
+                              model.endLoading();
+                            }
                           }
                         },
-                        child: Text('ログイン'),
+                        child: (loginflg) ? Text('ログイン') : Text('利用開始'),
                       ),
                       TextButton(
-                        onPressed: () async {
-                          // 画面遷移
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => RegisterPage(),
-                              fullscreenDialog: true,
-                            ),
-                          );
-                        },
+                        onPressed: loginflg
+                            ? () async {
+                                // 画面遷移
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RegisterPage(),
+                                    fullscreenDialog: true,
+                                  ),
+                                );
+                              }
+                            : null,
                         child: Text('新規登録の方はこちら'),
-                      ),
-                      TextButton(
-                        onPressed: () async {
-                          model.logout();
-                          Navigator.of(context).pop('NA');
-                        },
-                        child: Text('ログアウト'),
                       ),
                     ],
                   ),
@@ -103,10 +133,8 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
               ],
-            );
-          }),
-        ),
-      ),
-    );
+            )),
+          );
+        }));
   }
 }

@@ -7,13 +7,35 @@ class EditBookModel extends ChangeNotifier {
   EditBookModel(this.book) {
     dateController.text = book.reportdate;
     dairyController.text = book.diary;
-  }
 
+    setstyle();
+  }
   var dateController = TextEditingController();
   final dairyController = TextEditingController();
+  final styleController = TextEditingController();
+  final unitController = TextEditingController();
 
   DateTime? date;
   String? dairy;
+  void setstyle() {
+    switch (styleController.text) {
+      case '1':
+        styleController.text = '日誌型';
+        break;
+      case '2':
+        styleController.text = '数値型';
+        break;
+      case '3':
+        styleController.text = '実施/未実施型';
+        break;
+
+      case '4':
+        styleController.text = '5段階型';
+        break;
+      default:
+        break;
+    }
+  }
 
   void setDate(DateTime date) {
     this.date = date;
@@ -35,7 +57,7 @@ class EditBookModel extends ChangeNotifier {
 
     // firestoreに追加
     await FirebaseFirestore.instance.collection('report').doc(book.id).update({
-      'date': date,
+      //'date': date,
       'dairy': dairy,
     });
   }

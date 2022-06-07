@@ -37,9 +37,33 @@ class RegisterModel extends ChangeNotifier {
 
     if (email != null && password != null) {
       // firebase authでユーザー作成
-      final userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email!, password: password!);
-      final user = userCredential.user;
+      User? user;
+      try {
+        final userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email!, password: password!);
+
+        user = userCredential.user;
+      } on FirebaseAuthException catch (e) {
+        switch (e.code) {
+          case "invalid-email":
+            throw "メールアドレスの形式が違います";
+
+          case "wrong-password":
+            throw "パスワードの強度が足りません";
+
+          case "user-not-found":
+            throw "このメールアドレスは登録されていません";
+
+          case "user-disabled":
+            throw "このメールアドレスは無効です";
+
+          case "email-already-in-use":
+            throw "このメールアドレスはすでに使われています";
+
+          default:
+            throw "登録出来ません(" + e.code + ')';
+        }
+      }
 
       if (user != null) {
         final uid = user.uid;

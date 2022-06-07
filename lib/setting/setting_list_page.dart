@@ -8,11 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 
+Color _colorgray = Colors.grey;
+Color _colorbluck = Colors.black;
+Color _colorblue = Colors.blue;
+Color _colorblue2 = Colors.blue.shade900;
+Color _colororenge = Colors.orange;
+
 class SettingListPage extends StatelessWidget {
+  final DateTime date;
   final String email;
   final String calledtype; //1:setting add or edit 2:homepage
 
-  SettingListPage(this.email, this.calledtype);
+  SettingListPage(this.email, this.calledtype, this.date);
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +47,13 @@ class SettingListPage extends StatelessWidget {
                   (Setting) => Slidable(
                     actionPane: SlidableDrawerActionPane(),
                     child: ListTile(
-                      leading: _iconset(Setting.type),
+                      leading: _iconset(Setting.type, Setting.plan),
                       title: Text(Setting.contents),
                       onTap: () async {
                         //呼ばれた画面によって切替
                         if (calledtype == '1') {
-                          final String? title = await Navigator.push(
+                          //設定編集画面
+/*                           final String? title = await Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => EditSettingPage(Setting),
@@ -60,10 +68,10 @@ class SettingListPage extends StatelessWidget {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           }
-                          model.fetchSettingList(email);
+
+                          model.fetchSettingList(email); */
                         } else {
-                          //HOMEpageから呼ばれたらこっちが動くこと
-                          //print("引数" + calledtype);
+                          //HOME画面・日誌入力画面
                           Navigator.of(context).pop(Setting.type +
                               ':' +
                               Setting.contents); //type:contents
@@ -77,8 +85,7 @@ class SettingListPage extends StatelessWidget {
                         color: Colors.black45,
                         icon: Icons.edit,
                         onTap: () async {
-                          // 編集画面に遷移
-                          // 画面遷移
+                          // 編集しない
                           final String? title = await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -158,7 +165,7 @@ class SettingListPage extends StatelessWidget {
       builder: (_) {
         return AlertDialog(
           title: Text("削除の確認"),
-          content: Text("『${setting.contents}』を削除しますか？"),
+          content: Text("全ての日誌データも削除されます。『${setting.contents}』を削除しますか？"),
           actions: [
             TextButton(
               child: Text("いいえ"),
@@ -184,43 +191,68 @@ class SettingListPage extends StatelessWidget {
     );
   }
 
-  Widget _iconset(String index) {
+  Widget _iconset(String index, String _weeklyPlan) {
+    bool onoff;
+    int _weekday;
+
+    if (date.weekday == 7)
+      _weekday = 0;
+    else
+      _weekday = date.weekday;
+
+    if (_weeklyPlan[_weekday] == '1')
+      onoff = true;
+    else
+      onoff = false;
+
     switch (index) {
       case '01':
-        return Icon(Icons.account_circle, size: 64, color: Colors.black);
+        return Icon(Icons.account_circle,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
         break;
       case '02':
-        return Icon(Icons.info, size: 64, color: Colors.black);
+        return Icon(Icons.info,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
         break;
       case '03':
-        return Icon(Icons.check_circle, size: 64, color: Colors.black);
+        return Icon(Icons.check_circle,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
         break;
       case '04':
-        return Icon(Icons.article, size: 64, color: Colors.black);
+        return Icon(Icons.article,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
         break;
       case '05':
-        return Icon(Icons.schedule, size: 64, color: Colors.black);
+        return Icon(Icons.schedule,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
         break;
       case '06':
-        return Icon(Icons.event, size: 64, color: Colors.black);
+        return Icon(Icons.event,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
         break;
       case '07':
-        return Icon(Icons.thumb_up, size: 64, color: Colors.black);
+        return Icon(Icons.thumb_up,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
         break;
       case '08':
-        return Icon(Icons.sick, size: 64, color: Colors.black);
+        return Icon(Icons.sick,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
         break;
       case '09':
-        return Icon(Icons.mail, size: 64, color: Colors.black);
+        return Icon(Icons.mail,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
         break;
       case '10':
-        return Icon(Icons.flag, size: 64, color: Colors.black);
+        return Icon(Icons.flag,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
         break;
       case '11':
-        return Icon(Icons.report, size: 64, color: Colors.black);
+        return Icon(Icons.report,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
         break;
       case '12':
-        return Icon(Icons.camera, size: 64, color: Colors.black);
+        return Icon(Icons.camera,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
         break;
       default:
         return Icon(Icons.stop, size: 64, color: Colors.red);

@@ -3,5 +3,9 @@ class Setting {
   String type;
   String contents;
   String email;
-  Setting(this.id, this.type, this.contents, this.email);
+  String style;
+  String unit;
+  String plan;
+  Setting(this.id, this.type, this.contents, this.email, this.style, this.unit,
+      this.plan);
 }
