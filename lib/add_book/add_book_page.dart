@@ -39,20 +39,21 @@ class AddBookPage extends StatelessWidget {
                   TextField(
                     decoration: InputDecoration(
                       hintText: '日付',
+                      enabled: false,
                     ),
                     controller: _textEditingController,
                     onChanged: (text) {
                       // model.reportdated = setDate;
                     },
                   ),
-                  IconButton(
+/*                   IconButton(
                       //日付選択ボタン
                       onPressed: () {
                         //  _selectDate(context);
                         //  model.reportdated = setDate;
                       },
                       icon: Icon(Icons.calendar_month, size: 32)),
-
+ */
                   SizedBox(
                     height: 24,
                   ),

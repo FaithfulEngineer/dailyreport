@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:dailyreport/setting/setting_model.dart';
 import '/domain/setting.dart';
 import '/add_setting/add_setting_page.dart';
@@ -31,9 +33,15 @@ class SettingListPage extends StatelessWidget {
     return ChangeNotifierProvider<SettingListModel>(
       create: (_) => SettingListModel()..fetchSettingList(email),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('設定一覧'),
-        ),
+        appBar: AppBar(title: Text('設定一覧'), actions: [
+          IconButton(
+              //ログアウト
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.of(context).pop('NA');
+              },
+              icon: Icon(Icons.logout)),
+        ]),
         body: Center(
           child: Consumer<SettingListModel>(builder: (context, model, child) {
             final List<Setting>? settings = model.settings;

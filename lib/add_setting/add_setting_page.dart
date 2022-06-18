@@ -136,10 +136,10 @@ class AddSettingPage extends StatelessWidget {
                         model.unit = text;
                     },
                   ),
-                  SizedBox(
+                  /* SizedBox(
                     height: 12,
                   ),
-
+ */
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [Text('実施日')],
@@ -281,10 +281,11 @@ class AddSettingPage extends StatelessWidget {
                             decoration: TextDecoration.underline),
                       )),
 
-                  SizedBox(
+/*                   SizedBox(
                     height: 12,
                   ),
 
+ */
                   ElevatedButton(
                     onPressed: () async {
                       // 追加の処理

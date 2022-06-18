@@ -97,15 +97,13 @@ class ReportHomePage extends StatelessWidget {
                           } else
                             _email = 'NA';
                         } else {
-                          //ログアウト
-                          await model.logout();
-                          _email = 'NA';
+                          //何もしない
+                          /* await model.logout();
+                          _email = 'NA'; */
                           model.fetchReportList();
                         }
                       },
-                      icon: (_email == 'NA')
-                          ? Icon(Icons.login)
-                          : Icon(Icons.logout)),
+                      icon: Icon(Icons.login)),
                   IconButton(
                       //個人設定画面表示
                       onPressed: () async {
@@ -118,6 +116,11 @@ class ReportHomePage extends StatelessWidget {
                                   _email, _calltype, model.now!),
                             ),
                           );
+                          if (title == 'NA') {
+                            model.setemail('NA');
+                            _email = 'NA';
+                          }
+
                           model.fetchReportList();
                         } else
                           Null;
@@ -140,132 +143,133 @@ class ReportHomePage extends StatelessWidget {
                       (books) => Slidable(
                         actionPane: SlidableDrawerActionPane(),
                         child: ListTile(
-                            onTap: () async {
-                              if (books.diary != '') {
-                                //updateモード
-                                if (books.style == '1' || books.style == '2') {
-                                  final String? title = await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => EditBookPage(books),
-                                    ),
+                          onTap: () async {
+                            if (books.diary != '') {
+                              //updateモード
+                              if (books.style == '1' || books.style == '2') {
+                                final String? title = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditBookPage(books),
+                                  ),
+                                );
+
+                                if (title != null) {
+                                  final snackBar = SnackBar(
+                                    backgroundColor: Colors.green,
+                                    content: Text('$titleを編集しました'),
                                   );
-
-                                  if (title != null) {
-                                    final snackBar = SnackBar(
-                                      backgroundColor: Colors.green,
-                                      content: Text('$titleを編集しました'),
-                                    );
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBar);
-                                  }
-                                } else if (books.style == '3') {
-                                  if (books.diary == '1')
-                                    _donef = true;
-                                  else
-                                    _donef = false;
-
-                                  if (_donef) {
-                                    books.diary = '0';
-                                    _donef = false;
-                                  } else if (_donef == false) {
-                                    books.diary = '1';
-                                    _donef = true;
-                                  }
-                                  model.updatevalue('2', books);
-                                } else if (books.style == '4') {
-                                  _cntStars = int.parse(books.diary);
-                                  _cntStars++;
-                                  if (_cntStars == 6) _cntStars = 0;
-                                  books.diary = _cntStars.toString();
-                                  model.updatevalue('2', books);
-                                }
-                              } else {
-                                //insertモード
-                                DateTime? _now = model.now;
-                                if (_now == null)
-                                  _now = DateTime.now();
-                                else {
-                                  model.setdate(_now);
-                                }
-
-                                if (books.style == '1' || books.style == '2') {
-                                  final bool? added = await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          AddBookPage(_email, books, _now!),
-                                      fullscreenDialog: true,
-                                    ),
-                                  );
-
-                                  if (added != null && added) {
-                                    final snackBar = SnackBar(
-                                      backgroundColor: Colors.green,
-                                      content: Text('日誌を追加しました'),
-                                    );
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBar);
-                                  }
-                                } else if (books.style == '3') {
-                                  books.diary = '1';
-                                  _donef = true;
-                                  model.updatevalue('1', books);
-                                } else if (books.style == '4') {
-                                  _cntStars++;
-                                  if (_cntStars == 6) _cntStars = 0;
-                                  books.diary = _cntStars.toString();
-
-                                  model.updatevalue('1', books);
-                                }
-                              }
-                              model.fetchReportList();
-                            },
-                            onLongPress: () async {
-                              final String? title = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BookListPage(
-                                      _email, books.type, books.contets),
-                                ),
-                              );
-                            },
-                            textColor:
-                                (books.diary != '') ? _colorblue2 : _colorgray,
-                            iconColor:
-                                (books.diary != '') ? _colorblue2 : _colorgray,
-                            leading: _iconset(books.type, 64),
-                            title: Text(books.contets),
-                            subtitle: (() {
-                              if (books.style == '1') {
-                                return Text(books.diary);
-                              } else if (books.style == '2') {
-                                if (books.diary == '') {
-                                  return Text('0' + books.unit);
-                                } else {
-                                  return Text(books.diary + books.unit);
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
                                 }
                               } else if (books.style == '3') {
-                                //Done(1) or NotYet(0)
                                 if (books.diary == '1')
                                   _donef = true;
-                                else if (books.diary == '0')
+                                else
                                   _donef = false;
-                                else //初期値
-                                  _donef = false;
-                                return _done(context, _donef);
-                              } else if (books.style == '4') {
-                                //5段階
-                                if (int.tryParse(books.diary) != null) {
-                                  _cntStars = int.tryParse(books.diary)!;
-                                } else {
-                                  _cntStars = int.tryParse('0')!;
-                                }
 
-                                return _stars(context, _cntStars);
+                                if (_donef) {
+                                  books.diary = '0';
+                                  _donef = false;
+                                } else if (_donef == false) {
+                                  books.diary = '1';
+                                  _donef = true;
+                                }
+                                model.updatevalue('2', books);
+                              } else if (books.style == '4') {
+                                _cntStars = int.parse(books.diary);
+                                _cntStars++;
+                                if (_cntStars == 6) _cntStars = 0;
+                                books.diary = _cntStars.toString();
+                                model.updatevalue('2', books);
                               }
-                            })(),
-                            trailing: Icon(Icons.list_alt_outlined)),
+                            } else {
+                              //insertモード
+                              DateTime? _now = model.now;
+                              if (_now == null)
+                                _now = DateTime.now();
+                              else {
+                                model.setdate(_now);
+                              }
+
+                              if (books.style == '1' || books.style == '2') {
+                                final bool? added = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        AddBookPage(_email, books, _now!),
+                                    fullscreenDialog: true,
+                                  ),
+                                );
+
+                                if (added != null && added) {
+                                  final snackBar = SnackBar(
+                                    backgroundColor: Colors.green,
+                                    content: Text('日誌を追加しました'),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                }
+                              } else if (books.style == '3') {
+                                books.diary = '1';
+                                _donef = true;
+                                model.updatevalue('1', books);
+                              } else if (books.style == '4') {
+                                _cntStars++;
+                                if (_cntStars == 6) _cntStars = 0;
+                                books.diary = _cntStars.toString();
+
+                                model.updatevalue('1', books);
+                              }
+                            }
+                            model.fetchReportList();
+                          },
+                          onLongPress: () async {
+                            final String? title = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BookListPage(
+                                    _email, books.type, books.contets),
+                              ),
+                            );
+                          },
+                          textColor:
+                              (books.diary != '') ? _colorblue2 : _colorgray,
+                          iconColor:
+                              (books.diary != '') ? _colorblue2 : _colorgray,
+                          leading: _iconset(books.type, 64),
+                          title: Text(books.contets),
+                          subtitle: (() {
+                            if (books.style == '1') {
+                              return Text(books.diary);
+                            } else if (books.style == '2') {
+                              if (books.diary == '') {
+                                return Text('0' + books.unit);
+                              } else {
+                                return Text(books.diary + books.unit);
+                              }
+                            } else if (books.style == '3') {
+                              //Done(1) or NotYet(0)
+                              if (books.diary == '1')
+                                _donef = true;
+                              else if (books.diary == '0')
+                                _donef = false;
+                              else //初期値
+                                _donef = false;
+                              return _done(context, _donef);
+                            } else if (books.style == '4') {
+                              //5段階
+                              if (int.tryParse(books.diary) != null) {
+                                _cntStars = int.tryParse(books.diary)!;
+                              } else {
+                                _cntStars = int.tryParse('0')!;
+                              }
+
+                              return _stars(context, _cntStars);
+                            }
+                          })(),
+                          //trailing: Icon(Icons.touch_app)
+                        ),
                         secondaryActions: <Widget>[
                           IconSlideAction(
                             caption: '共有',

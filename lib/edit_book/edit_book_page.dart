@@ -17,7 +17,7 @@ class EditBookPage extends StatelessWidget {
       create: (_) => EditBookModel(book),
       child: Scaffold(
         appBar: AppBar(
-          title: (book.type == "1")
+          title: (book.style == "1")
               ? Text('${book.contets}を編集')
               : Text('${book.contets}(${book.unit})を編集'),
         ),
