@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:298587722224:android:bd455ac2fe60093065cd35",
         "android_client_info": {
-          "package_name": "com.example.dailyreport"
+          "package_name": "jp.harada_educate.journal"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "298587722224-9p9gah6ueski5u7rf3ljgedpd27ov69t.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.dailyreport"
+                "bundle_id": "jp.harada_educate.journal"
               }
             }
           ]
