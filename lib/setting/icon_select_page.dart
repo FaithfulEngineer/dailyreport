@@ -55,7 +55,7 @@ Widget _iconButtonset(BuildContext context, int index, int onoff) {
         icon: Icon(
           Icons.account_circle,
         ),
-        iconSize: 64,
+        iconSize: 32,
         color: (onoff == 0) ? Colors.black : Colors.grey,
         onPressed: () {
           if (onoff == 0)
@@ -70,7 +70,7 @@ Widget _iconButtonset(BuildContext context, int index, int onoff) {
         icon: Icon(
           Icons.info,
         ),
-        iconSize: 64,
+        iconSize: 32,
         color: (onoff == 0) ? Colors.black : Colors.grey,
         onPressed: () {
           if (onoff == 0)
@@ -85,7 +85,7 @@ Widget _iconButtonset(BuildContext context, int index, int onoff) {
         icon: Icon(
           Icons.check_circle,
         ),
-        iconSize: 64,
+        iconSize: 32,
         color: (onoff == 0) ? Colors.black : Colors.grey,
         onPressed: () {
           if (onoff == 0)
@@ -99,7 +99,7 @@ Widget _iconButtonset(BuildContext context, int index, int onoff) {
         icon: Icon(
           Icons.article,
         ),
-        iconSize: 64,
+        iconSize: 32,
         color: (onoff == 0) ? Colors.black : Colors.grey,
         onPressed: () {
           if (onoff == 0)
@@ -113,7 +113,7 @@ Widget _iconButtonset(BuildContext context, int index, int onoff) {
         icon: Icon(
           Icons.schedule,
         ),
-        iconSize: 64,
+        iconSize: 32,
         color: (onoff == 0) ? Colors.black : Colors.grey,
         onPressed: () {
           if (onoff == 0)
@@ -127,7 +127,7 @@ Widget _iconButtonset(BuildContext context, int index, int onoff) {
         icon: Icon(
           Icons.event,
         ),
-        iconSize: 64,
+        iconSize: 32,
         color: (onoff == 0) ? Colors.black : Colors.grey,
         onPressed: () {
           if (onoff == 0)
@@ -141,7 +141,7 @@ Widget _iconButtonset(BuildContext context, int index, int onoff) {
         icon: Icon(
           Icons.thumb_up,
         ),
-        iconSize: 64,
+        iconSize: 32,
         color: (onoff == 0) ? Colors.black : Colors.grey,
         onPressed: () {
           if (onoff == 0)
@@ -155,7 +155,7 @@ Widget _iconButtonset(BuildContext context, int index, int onoff) {
         icon: Icon(
           Icons.sick,
         ),
-        iconSize: 64,
+        iconSize: 32,
         color: (onoff == 0) ? Colors.black : Colors.grey,
         onPressed: () {
           if (onoff == 0)
@@ -169,7 +169,7 @@ Widget _iconButtonset(BuildContext context, int index, int onoff) {
         icon: Icon(
           Icons.mail,
         ),
-        iconSize: 64,
+        iconSize: 32,
         color: (onoff == 0) ? Colors.black : Colors.grey,
         onPressed: () {
           if (onoff == 0)
@@ -183,7 +183,7 @@ Widget _iconButtonset(BuildContext context, int index, int onoff) {
         icon: Icon(
           Icons.flag,
         ),
-        iconSize: 64,
+        iconSize: 32,
         color: (onoff == 0) ? Colors.black : Colors.grey,
         onPressed: () {
           if (onoff == 0)
@@ -197,7 +197,7 @@ Widget _iconButtonset(BuildContext context, int index, int onoff) {
         icon: Icon(
           Icons.report,
         ),
-        iconSize: 64,
+        iconSize: 32,
         color: (onoff == 0) ? Colors.black : Colors.grey,
         onPressed: () {
           if (onoff == 0)
@@ -211,7 +211,7 @@ Widget _iconButtonset(BuildContext context, int index, int onoff) {
         icon: Icon(
           Icons.camera,
         ),
-        iconSize: 64,
+        iconSize: 32,
         color: (onoff == 0) ? Colors.black : Colors.grey,
         onPressed: () {
           if (onoff == 0)
@@ -220,6 +220,598 @@ Widget _iconButtonset(BuildContext context, int index, int onoff) {
             null;
         },
       );
+    case 13:
+      return IconButton(
+        icon: Icon(
+          Icons.favorite_border,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('13');
+          else
+            null;
+        },
+      );
+
+    case 14:
+      return IconButton(
+        icon: Icon(
+          Icons.local_hospital,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('14');
+          else
+            null;
+        },
+      );
+
+    case 15:
+      return IconButton(
+        icon: Icon(
+          Icons.paid,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('15');
+          else
+            null;
+        },
+      );
+
+    case 16:
+      return IconButton(
+        icon: Icon(
+          Icons.star_rate,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('16');
+          else
+            null;
+        },
+      );
+
+    case 17:
+      return IconButton(
+        icon: Icon(
+          Icons.outbond,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('17');
+          else
+            null;
+        },
+      );
+
+    case 18:
+      return IconButton(
+        icon: Icon(
+          Icons.lightbulb_outline,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('18');
+          else
+            null;
+        },
+      );
+
+    case 19:
+      return IconButton(
+        icon: Icon(
+          Icons.people_alt,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('19');
+          else
+            null;
+        },
+      );
+
+    case 20:
+      return IconButton(
+        icon: Icon(
+          Icons.water_drop,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('20');
+          else
+            null;
+        },
+      );
+
+    case 21:
+      return IconButton(
+        icon: Icon(
+          Icons.waving_hand,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('21');
+          else
+            null;
+        },
+      );
+
+    case 22:
+      return IconButton(
+        icon: Icon(
+          Icons.send,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('22');
+          else
+            null;
+        },
+      );
+
+    case 23:
+      return IconButton(
+        icon: Icon(
+          Icons.insights,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('23');
+          else
+            null;
+        },
+      );
+
+    case 24:
+      return IconButton(
+        icon: Icon(
+          Icons.edit,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('24');
+          else
+            null;
+        },
+      );
+
+    case 25:
+      return IconButton(
+        icon: Icon(
+          Icons.music_note,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('25');
+          else
+            null;
+        },
+      );
+
+    case 26:
+      return IconButton(
+        icon: Icon(
+          Icons.bedtime,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('26');
+          else
+            null;
+        },
+      );
+
+    case 27:
+      return IconButton(
+        icon: Icon(
+          Icons.currency_yen,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('27');
+          else
+            null;
+        },
+      );
+
+    case 28:
+      return IconButton(
+        icon: Icon(
+          Icons.key,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('28');
+          else
+            null;
+        },
+      );
+
+    case 29:
+      return IconButton(
+        icon: Icon(
+          Icons.stay_current_portrait,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('29');
+          else
+            null;
+        },
+      );
+
+    case 30:
+      return IconButton(
+        icon: Icon(
+          Icons.directions_run,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('30');
+          else
+            null;
+        },
+      );
+
+    case 31:
+      return IconButton(
+        icon: Icon(
+          Icons.directions_walk,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('31');
+          else
+            null;
+        },
+      );
+
+    case 32:
+      return IconButton(
+        icon: Icon(
+          Icons.directions_bike,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('32');
+          else
+            null;
+        },
+      );
+
+    case 33:
+      return IconButton(
+        icon: Icon(
+          Icons.fastfood,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('33');
+          else
+            null;
+        },
+      );
+
+    case 34:
+      return IconButton(
+        icon: Icon(
+          Icons.directions_bus,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('34');
+          else
+            null;
+        },
+      );
+
+    case 35:
+      return IconButton(
+        icon: Icon(
+          Icons.local_florist,
+        ),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('35');
+          else
+            null;
+        },
+      );
+
+    case 36:
+      return IconButton(
+        icon: Icon(Icons.play_circle),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('36');
+          else
+            null;
+        },
+      );
+
+    case 37:
+      return IconButton(
+        icon: Icon(Icons.savings),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('37');
+          else
+            null;
+        },
+      );
+
+    case 38:
+      return IconButton(
+        icon: Icon(Icons.arrow_right_alt),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('38');
+          else
+            null;
+        },
+      );
+
+    case 39:
+      return IconButton(
+        icon: Icon(Icons.pets),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('39');
+          else
+            null;
+        },
+      );
+
+    case 40:
+      return IconButton(
+        icon: Icon(Icons.flight_takeoff),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('40');
+          else
+            null;
+        },
+      );
+
+    case 41:
+      return IconButton(
+        icon: Icon(Icons.extension),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('41');
+          else
+            null;
+        },
+      );
+
+    case 42:
+      return IconButton(
+        icon: Icon(Icons.rocket_launch),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('42');
+          else
+            null;
+        },
+      );
+
+    case 43:
+      return IconButton(
+        icon: Icon(Icons.nightlight_round),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('43');
+          else
+            null;
+        },
+      );
+
+    case 44:
+      return IconButton(
+        icon: Icon(Icons.anchor),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('44');
+          else
+            null;
+        },
+      );
+
+    case 45:
+      return IconButton(
+        icon: Icon(Icons.home_filled),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('45');
+          else
+            null;
+        },
+      );
+
+    case 46:
+      return IconButton(
+        icon: Icon(Icons.transcribe),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('46');
+          else
+            null;
+        },
+      );
+
+    case 47:
+      return IconButton(
+        icon: Icon(Icons.school),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('47');
+          else
+            null;
+        },
+      );
+
+    case 48:
+      return IconButton(
+        icon: Icon(Icons.sports_esports),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('48');
+          else
+            null;
+        },
+      );
+
+    case 49:
+      return IconButton(
+        icon: Icon(Icons.self_improvement),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('49');
+          else
+            null;
+        },
+      );
+
+    case 50:
+      return IconButton(
+        icon: Icon(Icons.cake),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('50');
+          else
+            null;
+        },
+      );
+
+    case 51:
+      return IconButton(
+        icon: Icon(Icons.whatsapp),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('51');
+          else
+            null;
+        },
+      );
+
+    case 52:
+      return IconButton(
+        icon: Icon(Icons.emoji_emotions),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('52');
+          else
+            null;
+        },
+      );
+
+    case 53:
+      return IconButton(
+        icon: Icon(Icons.front_hand),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('53');
+          else
+            null;
+        },
+      );
+
+    case 54:
+      return IconButton(
+        icon: Icon(Icons.woman),
+        iconSize: 32,
+        color: (onoff == 0) ? Colors.black : Colors.grey,
+        onPressed: () {
+          if (onoff == 0)
+            Navigator.of(context).pop('54');
+          else
+            null;
+        },
+      );
+
     default:
       return Icon(Icons.stop, size: 64, color: Colors.red);
       break;
@@ -262,7 +854,7 @@ class Iconsetting extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      for (int idx = 1; idx < 4; idx++) ...[
+                      for (int idx = 1; idx < 7; idx++) ...[
                         _iconButtonset(context, idx, model.GetTypes(idx))
                       ],
                     ],
@@ -273,7 +865,7 @@ class Iconsetting extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      for (int idx = 4; idx < 7; idx++) ...[
+                      for (int idx = 7; idx < 13; idx++) ...[
                         _iconButtonset(context, idx, model.GetTypes(idx))
                       ],
                     ],
@@ -284,7 +876,7 @@ class Iconsetting extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      for (int idx = 7; idx < 10; idx++) ...[
+                      for (int idx = 13; idx < 19; idx++) ...[
                         _iconButtonset(context, idx, model.GetTypes(idx))
                       ],
                     ],
@@ -295,8 +887,63 @@ class Iconsetting extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      for (int idx = 10; idx < 13; idx++) ...[
+                      for (int idx = 19; idx < 25; idx++) ...[
                         _iconButtonset(context, idx, model.GetTypes(idx))
+                      ],
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 32),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      for (int idx = 25; idx < 31; idx++) ...[
+                        _iconButtonset(context, idx, model.GetTypes(idx))
+                      ],
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 32),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      for (int idx = 31; idx < 37; idx++) ...[
+                        _iconButtonset(context, idx, model.GetTypes(idx)),
+                      ],
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 32),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      for (int idx = 37; idx < 43; idx++) ...[
+                        _iconButtonset(context, idx, model.GetTypes(idx)),
+                      ],
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 32),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      for (int idx = 43; idx < 49; idx++) ...[
+                        _iconButtonset(context, idx, model.GetTypes(idx)),
+                      ],
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 32),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      for (int idx = 49; idx < 55; idx++) ...[
+                        _iconButtonset(context, idx, model.GetTypes(idx)),
                       ],
                     ],
                   ),

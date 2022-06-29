@@ -27,7 +27,7 @@ class EditBookPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-//日付項目は表示のみのとした。
+                  //日付項目は表示のみのとした。
                   TextField(
                     controller: model.dateController,
                     decoration: InputDecoration(
@@ -35,17 +35,9 @@ class EditBookPage extends StatelessWidget {
                     ),
                     enabled: false,
                     onChanged: (text) {
-                      //チェンジはテキストを直接変更した場合しか実行されない。
                       model.date = setDate;
                     },
                   ),
-/*                   IconButton(
-                      onPressed: () async {
-                        await _selectDate(context);
-                        model.dateController.text = _textEditingController.text;
-                      },
-                      icon: Icon(Icons.calendar_today)),
- */
                   SizedBox(
                     height: 8,
                   ),
@@ -60,15 +52,17 @@ class EditBookPage extends StatelessWidget {
                     ),
                     onChanged: (text) {
                       if (book.style == '2') {
+                        //数値型
                         if (int.tryParse(text) != null) {
-                          model.dairy = text;
+                          model.setDairy(text);
                         } else {
                           text = '';
                         }
                       } else {
+                        //文字列型
                         model.dairy = text;
                       }
-
+                      //数値文字型共通
                       model.setDairy(text);
                     },
                   ),
@@ -76,21 +70,12 @@ class EditBookPage extends StatelessWidget {
                     height: 16,
                   ),
 
-/*                   TextField(
-                    controller: model.styleController,
-                    enabled: false,
-                  ), //必要？
-                  TextField(
-                    controller: model.unitController,
-                    enabled: false,
-                  ), //必要？
- */
                   ElevatedButton(
                     onPressed: model.isUpdated()
                         ? () async {
                             // 追加の処理
                             try {
-                              await model.update(setDate);
+                              await model.update(setDate, book.style);
                               Navigator.of(context).pop(model.date);
                             } catch (e) {
                               final snackBar = SnackBar(

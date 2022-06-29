@@ -38,7 +38,7 @@ class IconListModel extends ChangeNotifier {
 
     var _flg = 'n';
 
-    for (int i = 1; i < 13; i++) {
+    for (int i = 1; i < 55; i++) {
       for (String _itypes in _types) {
         if (i == int.tryParse(_itypes)) {
           types.add(1);

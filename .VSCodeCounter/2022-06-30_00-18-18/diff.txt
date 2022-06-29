@@ -1,0 +1,36 @@
+Date : 2022-06-30 00:18:18
+Directory : c:\Users\yamamototd\Desktop\work\flutter\dailyreport
+Total : 6 files,  537 codes, 0 comments, 107 blanks, all 644 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Dart     |          6 |        537 |          0 |        107 |        644 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                         | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                            |          6 |        537 |          0 |        107 |        644 |
+| lib                                                                                          |          6 |        537 |          0 |        107 |        644 |
+| lib\add_book                                                                                 |          1 |         54 |          0 |         18 |         72 |
+| lib\add_setting                                                                              |          1 |         54 |          0 |         18 |         72 |
+| lib\edit_setting                                                                             |          1 |         54 |          0 |         18 |         72 |
+| lib\homepage                                                                                 |          1 |         54 |          0 |         18 |         72 |
+| lib\setting                                                                                  |          2 |        321 |          0 |         35 |        356 |
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                     | language | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\add_book\add_book_page.dart         | Dart     |         54 |          0 |         18 |         72 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\add_setting\add_setting_page.dart   | Dart     |         54 |          0 |         18 |         72 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\edit_setting\edit_setting_page.dart | Dart     |         54 |          0 |         18 |         72 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\homepage\report_home_page.dart      | Dart     |         54 |          0 |         18 |         72 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\setting\icon_select_page.dart       | Dart     |        249 |          0 |         18 |        267 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\setting\setting_list_page.dart      | Dart     |         72 |          0 |         17 |         89 |
+| Total                                                                                        |          |        537 |          0 |        107 |        644 |
++----------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

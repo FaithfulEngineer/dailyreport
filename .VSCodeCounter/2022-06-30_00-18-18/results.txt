@@ -1,16 +1,16 @@
-Date : 2022-05-31 16:31:39
+Date : 2022-06-30 00:18:18
 Directory : c:\Users\yamamototd\Desktop\work\flutter\dailyreport
-Total : 60 files,  3895 codes, 514 comments, 482 blanks, all 4891 lines
+Total : 60 files,  5348 codes, 429 comments, 745 blanks, all 6522 lines
 
 Languages
 +------------+------------+------------+------------+------------+------------+
 | language   | files      | code       | comment    | blank      | total      |
 +------------+------------+------------+------------+------------+------------+
-| Dart       |         25 |      2,905 |        343 |        281 |      3,529 |
+| Dart       |         25 |      4,342 |        257 |        542 |      5,141 |
 | C++        |         11 |        408 |         80 |        132 |        620 |
 | JSON       |          4 |        226 |          0 |          3 |        229 |
-| XML        |          9 |        123 |         46 |         11 |        180 |
-| Groovy     |          3 |         94 |          3 |         22 |        119 |
+| XML        |          9 |        126 |         46 |         11 |        183 |
+| Groovy     |          3 |        107 |          4 |         24 |        135 |
 | HTML       |          1 |         80 |         18 |          7 |        105 |
 | YAML       |          2 |         26 |         23 |         13 |         62 |
 | Markdown   |          2 |         13 |          0 |          9 |         22 |
@@ -22,9 +22,9 @@ Directories
 +--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
 | path                                                                                                               | files      | code       | comment    | blank      | total      |
 +--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
-| .                                                                                                                  |         60 |      3,895 |        514 |        482 |      4,891 |
-| android                                                                                                            |         13 |        210 |         48 |         33 |        291 |
-| android\app                                                                                                        |          9 |        166 |         47 |         22 |        235 |
+| .                                                                                                                  |         60 |      5,348 |        429 |        745 |      6,522 |
+| android                                                                                                            |         13 |        223 |         49 |         35 |        307 |
+| android\app                                                                                                        |          9 |        179 |         48 |         24 |        251 |
 | android\app\src                                                                                                    |          7 |         62 |         44 |          9 |        115 |
 | android\app\src\debug                                                                                              |          1 |          4 |          3 |          1 |          8 |
 | android\app\src\main                                                                                               |          5 |         54 |         38 |          7 |         99 |
@@ -36,23 +36,23 @@ Directories
 | android\app\src\profile                                                                                            |          1 |          4 |          3 |          1 |          8 |
 | android\gradle                                                                                                     |          1 |          5 |          1 |          1 |          7 |
 | android\gradle\wrapper                                                                                             |          1 |          5 |          1 |          1 |          7 |
-| ios                                                                                                                |          7 |        222 |          2 |          9 |        233 |
-| ios\Runner                                                                                                         |          7 |        222 |          2 |          9 |        233 |
+| ios                                                                                                                |          7 |        225 |          2 |          9 |        236 |
+| ios\Runner                                                                                                         |          7 |        225 |          2 |          9 |        236 |
 | ios\Runner\Assets.xcassets                                                                                         |          3 |        148 |          0 |          4 |        152 |
 | ios\Runner\Assets.xcassets\AppIcon.appiconset                                                                      |          1 |        122 |          0 |          1 |        123 |
 | ios\Runner\Assets.xcassets\LaunchImage.imageset                                                                    |          2 |         26 |          0 |          3 |         29 |
-| ios\Runner\Base.lproj                                                                                              |          2 |         61 |          2 |          2 |         65 |
-| lib                                                                                                                |         24 |      2,891 |        333 |        274 |      3,498 |
-| lib\add_book                                                                                                       |          2 |        216 |         33 |         24 |        273 |
-| lib\add_setting                                                                                                    |          2 |        377 |         28 |         30 |        435 |
-| lib\book_list                                                                                                      |          2 |        287 |         99 |         35 |        421 |
+| ios\Runner\Base.lproj                                                                                              |          2 |         64 |          2 |          2 |         68 |
+| lib                                                                                                                |         24 |      4,328 |        247 |        535 |      5,110 |
+| lib\add_book                                                                                                       |          2 |        322 |         68 |         65 |        455 |
+| lib\add_setting                                                                                                    |          2 |        512 |          2 |         69 |        583 |
+| lib\book_list                                                                                                      |          2 |        368 |        102 |         39 |        509 |
 | lib\domain                                                                                                         |          3 |         32 |          0 |          4 |         36 |
-| lib\edit_book                                                                                                      |          2 |        167 |          8 |         19 |        194 |
-| lib\edit_setting                                                                                                   |          2 |        329 |         18 |         20 |        367 |
-| lib\homepage                                                                                                       |          2 |        529 |        118 |         53 |        700 |
-| lib\login                                                                                                          |          2 |        182 |          2 |         17 |        201 |
-| lib\register                                                                                                       |          2 |        124 |          3 |         15 |        142 |
-| lib\setting                                                                                                        |          4 |        627 |         24 |         54 |        705 |
+| lib\edit_book                                                                                                      |          2 |        164 |          7 |         18 |        189 |
+| lib\edit_setting                                                                                                   |          2 |        457 |         12 |         62 |        531 |
+| lib\homepage                                                                                                       |          2 |        687 |         21 |         96 |        804 |
+| lib\login                                                                                                          |          2 |        199 |          4 |         17 |        220 |
+| lib\register                                                                                                       |          2 |        142 |          3 |         21 |        166 |
+| lib\setting                                                                                                        |          4 |      1,424 |         28 |        141 |      1,593 |
 | test                                                                                                               |          1 |         14 |         10 |          7 |         31 |
 | web                                                                                                                |          2 |        115 |         18 |          8 |        141 |
 | windows                                                                                                            |         10 |        407 |         80 |        131 |        618 |
@@ -66,7 +66,7 @@ Files
 +--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\README.md                                                     | Markdown   |         10 |          0 |          7 |         17 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\analysis_options.yaml                                         | YAML       |          3 |         23 |          4 |         30 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\android\app\build.gradle                                      | Groovy     |         58 |          3 |         13 |         74 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\android\app\build.gradle                                      | Groovy     |         71 |          4 |         15 |         90 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\android\app\google-services.json                              | JSON       |         46 |          0 |          0 |         46 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\android\app\src\debug\AndroidManifest.xml                     | XML        |          4 |          3 |          1 |          8 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\android\app\src\main\AndroidManifest.xml                      | XML        |         28 |          6 |          1 |         35 |
@@ -84,32 +84,32 @@ Files
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\ios\Runner\Assets.xcassets\LaunchImage.imageset\Contents.json | JSON       |         23 |          0 |          1 |         24 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\ios\Runner\Assets.xcassets\LaunchImage.imageset\README.md     | Markdown   |          3 |          0 |          2 |          5 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\ios\Runner\Base.lproj\LaunchScreen.storyboard                 | XML        |         36 |          1 |          1 |         38 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\ios\Runner\Base.lproj\Main.storyboard                         | XML        |         25 |          1 |          1 |         27 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\ios\Runner\Base.lproj\Main.storyboard                         | XML        |         28 |          1 |          1 |         30 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\ios\Runner\Runner-Bridging-Header.h                           | C++        |          1 |          0 |          1 |          2 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\add_book\add_book_model.dart                              | Dart       |         61 |          1 |         13 |         75 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\add_book\add_book_page.dart                               | Dart       |        155 |         32 |         11 |        198 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\add_setting\add_setting_model.dart                        | Dart       |         49 |          1 |         13 |         63 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\add_setting\add_setting_page.dart                         | Dart       |        328 |         27 |         17 |        372 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\book_list\book_list_model.dart                            | Dart       |        104 |          2 |         22 |        128 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\book_list\book_list_page.dart                             | Dart       |        183 |         97 |         13 |        293 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\add_book\add_book_model.dart                              | Dart       |         62 |          1 |         13 |         76 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\add_book\add_book_page.dart                               | Dart       |        260 |         67 |         52 |        379 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\add_setting\add_setting_model.dart                        | Dart       |         55 |          1 |         15 |         71 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\add_setting\add_setting_page.dart                         | Dart       |        457 |          1 |         54 |        512 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\book_list\book_list_model.dart                            | Dart       |        139 |          4 |         26 |        169 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\book_list\book_list_page.dart                             | Dart       |        229 |         98 |         13 |        340 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\domain\book.dart                                          | Dart       |         14 |          0 |          1 |         15 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\domain\homepage.dart                                      | Dart       |          7 |          0 |          2 |          9 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\domain\setting.dart                                       | Dart       |         11 |          0 |          1 |         12 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\edit_book\edit_book_model.dart                            | Dart       |         52 |          3 |         10 |         65 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\edit_book\edit_book_page.dart                             | Dart       |        115 |          5 |          9 |        129 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\edit_setting\edit_setting_model.dart                      | Dart       |         59 |          8 |         14 |         81 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\edit_setting\edit_setting_page.dart                       | Dart       |        270 |         10 |          6 |        286 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\homepage\report_home_model.dart                           | Dart       |        171 |         46 |         29 |        246 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\homepage\report_home_page.dart                            | Dart       |        358 |         72 |         24 |        454 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\login\login_model.dart                                    | Dart       |         51 |          1 |         14 |         66 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\login\login_page.dart                                     | Dart       |        131 |          1 |          3 |        135 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\edit_book\edit_book_model.dart                            | Dart       |         59 |          1 |         10 |         70 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\edit_book\edit_book_page.dart                             | Dart       |        105 |          6 |          8 |        119 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\edit_setting\edit_setting_model.dart                      | Dart       |         60 |          2 |         13 |         75 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\edit_setting\edit_setting_page.dart                       | Dart       |        397 |         10 |         49 |        456 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\homepage\report_home_model.dart                           | Dart       |        166 |          7 |         28 |        201 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\homepage\report_home_page.dart                            | Dart       |        521 |         14 |         68 |        603 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\login\login_model.dart                                    | Dart       |         65 |          1 |         13 |         79 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\login\login_page.dart                                     | Dart       |        134 |          3 |          4 |        141 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\main.dart                                                 | Dart       |         21 |          0 |          3 |         24 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\register\register_model.dart                              | Dart       |         43 |          2 |         12 |         57 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\register\register_model.dart                              | Dart       |         61 |          2 |         18 |         81 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\register\register_page.dart                               | Dart       |         81 |          1 |          3 |         85 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\setting\icon_select_model.dart                            | Dart       |         54 |          0 |         12 |         66 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\setting\icon_select_page.dart                             | Dart       |        298 |          0 |         12 |        310 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\setting\setting_list_page.dart                            | Dart       |        221 |         24 |         18 |        263 |
-| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\setting\setting_model.dart                                | Dart       |         54 |          0 |         12 |         66 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\setting\icon_select_page.dart                             | Dart       |        903 |          0 |         54 |        957 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\setting\setting_list_page.dart                            | Dart       |        395 |         25 |         61 |        481 |
+| c:\Users\yamamototd\Desktop\work\flutter\dailyreport\lib\setting\setting_model.dart                                | Dart       |         72 |          3 |         14 |         89 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\pubspec.yaml                                                  | YAML       |         23 |          0 |          9 |         32 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\test\widget_test.dart                                         | Dart       |         14 |         10 |          7 |         31 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\web\index.html                                                | HTML       |         80 |         18 |          7 |        105 |
@@ -124,5 +124,5 @@ Files
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\windows\runner\utils.h                                        | C++        |          8 |          6 |          6 |         20 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\windows\runner\win32_window.cpp                               | C++        |        183 |         15 |         48 |        246 |
 | c:\Users\yamamototd\Desktop\work\flutter\dailyreport\windows\runner\win32_window.h                                 | C++        |         48 |         29 |         22 |         99 |
-| Total                                                                                                              |            |      3,895 |        514 |        482 |      4,891 |
+| Total                                                                                                              |            |      5,348 |        429 |        745 |      6,522 |
 +--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

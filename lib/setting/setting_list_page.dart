@@ -262,6 +262,216 @@ class SettingListPage extends StatelessWidget {
         return Icon(Icons.camera,
             size: 64, color: (onoff) ? _colorblue2 : _colorgray);
         break;
+
+      case '13':
+        return Icon(Icons.favorite_border,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '14':
+        return Icon(Icons.local_hospital,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '15':
+        return Icon(Icons.paid,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '16':
+        return Icon(Icons.star_rate,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '17':
+        return Icon(Icons.outbound,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '18':
+        return Icon(Icons.lightbulb_outline,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '19':
+        return Icon(Icons.people_alt,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '20':
+        return Icon(Icons.water_drop,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '21':
+        return Icon(Icons.waving_hand,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '22':
+        return Icon(Icons.send,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '23':
+        return Icon(Icons.insights,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '24':
+        return Icon(Icons.edit,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '25':
+        return Icon(Icons.music_note,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '26':
+        return Icon(Icons.bedtime,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '27':
+        return Icon(Icons.currency_yen,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '28':
+        return Icon(Icons.key,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '29':
+        return Icon(Icons.stay_current_portrait,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '30':
+        return Icon(Icons.directions_run,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '31':
+        return Icon(Icons.directions_walk,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '32':
+        return Icon(Icons.directions_bike,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '33':
+        return Icon(Icons.fastfood,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '34':
+        return Icon(Icons.directions_bus,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '35':
+        return Icon(Icons.local_florist,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '36':
+        return Icon(Icons.play_circle,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '37':
+        return Icon(Icons.savings,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '38':
+        return Icon(Icons.arrow_right_alt,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '39':
+        return Icon(Icons.pets,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '40':
+        return Icon(Icons.flight_takeoff,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '41':
+        return Icon(Icons.extension,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '42':
+        return Icon(Icons.rocket_launch,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '43':
+        return Icon(Icons.nightlight_round,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '44':
+        return Icon(Icons.anchor,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '45':
+        return Icon(Icons.home_filled,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '46':
+        return Icon(Icons.transcribe,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '47':
+        return Icon(Icons.school,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '48':
+        return Icon(Icons.sports_esports,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '49':
+        return Icon(Icons.self_improvement,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '50':
+        return Icon(Icons.cake,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+      case '51':
+        return Icon(Icons.whatsapp,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '52':
+        return Icon(Icons.emoji_emotions,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '53':
+        return Icon(Icons.front_hand,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
+      case '54':
+        return Icon(Icons.woman,
+            size: 64, color: (onoff) ? _colorblue2 : _colorgray);
+        break;
+
       default:
         return Icon(Icons.stop, size: 64, color: Colors.red);
         break;

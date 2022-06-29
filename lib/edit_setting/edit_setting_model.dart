@@ -49,13 +49,6 @@ class EditSettingModel extends ChangeNotifier {
     return type != null || contents != null || plan != null;
   }
 
-/*   void setplan(String plan) {
-    this.plan = plan;
-
-    print(plan);
-    notifyListeners();
-  } */
-
   Future update() async {
     this.type = typeController.text;
     this.contents = contentsController.text;

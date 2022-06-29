@@ -32,11 +32,11 @@ class AddBookModel extends ChangeNotifier {
     }
 
     if (dairy == null || dairy!.isEmpty) {
-      throw '日誌が入力されていません';
+      throw '日誌（本文）が入力されていません';
     }
 
     if (type == null || type == "") {
-      throw '種別（アイコン）が入力されていません';
+      throw 'アイコンが設定されていません';
     }
 
     if (style == null || style == "") {

@@ -13,7 +13,7 @@ class AddSettingModel extends ChangeNotifier {
 
   Future addSetting() async {
     if (type == null || type == "") {
-      throw '種別（数字）が入力されていません';
+      throw 'アイコンが設定されていません';
     }
 
     if (contents == null || contents == "") {
@@ -30,6 +30,10 @@ class AddSettingModel extends ChangeNotifier {
 
     if (style == '2' && (unit == null || unit == '')) {
       throw 'データ型が数字の場合は単位を必ず入力してください';
+    }
+
+    if (plan == null || plan == '') {
+      throw '実施日が入力されていません';
     }
 
     if (unit == null) this.unit = 'NA'; //

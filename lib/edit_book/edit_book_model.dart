@@ -51,13 +51,18 @@ class EditBookModel extends ChangeNotifier {
     return date != null || dairy != null;
   }
 
-  Future update(DateTime date) async {
-    //this.date = date;
-    this.dairy = dairyController.text;
+  Future update(DateTime date, String style) async {
+    dairy = dairyController.text;
+    if (style == '2') {
+      if (dairy != null || dairy!.isEmpty) {
+        if (int.tryParse(dairy!) == null) {
+          throw '数字が入力されていません';
+        }
+      }
+    }
 
     // firestoreに追加
     await FirebaseFirestore.instance.collection('report').doc(book.id).update({
-      //'date': date,
       'dairy': dairy,
     });
   }

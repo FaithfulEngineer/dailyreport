@@ -17,7 +17,15 @@ String _weeklyPlan = '0000000';
 
 class AddSettingPage extends StatelessWidget {
   final String email;
-  AddSettingPage(this.email);
+  AddSettingPage(this.email) {
+    _sun = '0';
+    _mon = '0';
+    _tue = '0';
+    _wed = '0';
+    _thu = '0';
+    _fri = '0';
+    _sta = '0';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,37 +55,10 @@ class AddSettingPage extends StatelessWidget {
                         model.email = email;
                       }
                     },
-                    icon: _iconset(model.type),
+                    icon: _iconset(model.type, 64),
                     label: Text('アイコン'),
-                    style: ElevatedButton.styleFrom(primary: Colors.grey),
+                    style: ElevatedButton.styleFrom(primary: Colors.white),
                   ),
-
-//                  IconButton(
-//                    icon: _iconset(model.type),
-//                    onPressed: () async {
-//                      final String? title = await Navigator.push(
-//                        context,
-//                        MaterialPageRoute(
-//                          builder: (context) => Iconsetting(),
-//                        ),
-//                      );
-//                      if (title != null) {
-//                        model.typeController.text = title;
-//                        model.setType(title);
-//                        model.email = email;
-//                      }
-//                    },
-//                  ),
-//                  TextField(
-//                    enabled: false,
-//                    controller: model.typeController,
-//                    decoration: InputDecoration(
-//                    //  hintText: 'アイコンを選択',
-//                    ),
-//                    onChanged: (text) {
-//                      model.type = text;
-//                    },
-//                  ),
                   TextField(
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
@@ -92,7 +73,6 @@ class AddSettingPage extends StatelessWidget {
                   SizedBox(
                     height: 12,
                   ),
-
                   DropdownButton(
                     value: model.style,
                     items: const [
@@ -122,7 +102,6 @@ class AddSettingPage extends StatelessWidget {
                       model.setStyle(text.toString());
                     },
                   ),
-
                   TextField(
                     maxLines: null,
                     enabled: _unituseflg,
@@ -136,15 +115,10 @@ class AddSettingPage extends StatelessWidget {
                         model.unit = text;
                     },
                   ),
-                  /* SizedBox(
-                    height: 12,
-                  ),
- */
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [Text('実施日')],
                   ),
-
                   Row(
                     children: [
                       SizedBox(
@@ -280,12 +254,6 @@ class AddSettingPage extends StatelessWidget {
                             color: Colors.black,
                             decoration: TextDecoration.underline),
                       )),
-
-/*                   SizedBox(
-                    height: 12,
-                  ),
-
- */
                   ElevatedButton(
                     onPressed: () async {
                       // 追加の処理
@@ -327,46 +295,216 @@ class AddSettingPage extends StatelessWidget {
     _weeklyPlan = _sun + _mon + _tue + _wed + _thu + _fri + _sta;
   }
 
-  Widget _iconset(String? index) {
+  Widget _iconset(String? index, double _size) {
     switch (index) {
       case '01':
-        return Icon(Icons.account_circle, size: 64, color: Colors.black);
+        return Icon(Icons.account_circle, size: _size, color: Colors.black);
         break;
       case '02':
-        return Icon(Icons.info, size: 64, color: Colors.black);
+        return Icon(Icons.info, size: _size, color: Colors.black);
         break;
       case '03':
-        return Icon(Icons.check_circle, size: 64, color: Colors.black);
+        return Icon(Icons.check_circle, size: _size, color: Colors.black);
         break;
       case '04':
-        return Icon(Icons.article, size: 64, color: Colors.black);
+        return Icon(Icons.article, size: _size, color: Colors.black);
         break;
       case '05':
-        return Icon(Icons.schedule, size: 64, color: Colors.black);
+        return Icon(Icons.schedule, size: _size, color: Colors.black);
         break;
       case '06':
-        return Icon(Icons.event, size: 64, color: Colors.black);
+        return Icon(Icons.event, size: _size, color: Colors.black);
         break;
       case '07':
-        return Icon(Icons.thumb_up, size: 64, color: Colors.black);
+        return Icon(Icons.thumb_up, size: _size, color: Colors.black);
         break;
       case '08':
-        return Icon(Icons.sick, size: 64, color: Colors.black);
+        return Icon(Icons.sick, size: _size, color: Colors.black);
         break;
       case '09':
-        return Icon(Icons.mail, size: 64, color: Colors.black);
+        return Icon(Icons.mail, size: _size, color: Colors.black);
         break;
       case '10':
-        return Icon(Icons.flag, size: 64, color: Colors.black);
+        return Icon(Icons.flag, size: _size, color: Colors.black);
         break;
       case '11':
-        return Icon(Icons.report, size: 64, color: Colors.black);
+        return Icon(Icons.report, size: _size, color: Colors.black);
         break;
       case '12':
-        return Icon(Icons.camera, size: 64, color: Colors.black);
+        return Icon(Icons.camera, size: _size, color: Colors.black);
         break;
+
+      case '13':
+        return Icon(Icons.favorite_border, size: _size, color: Colors.black);
+        break;
+
+      case '14':
+        return Icon(Icons.local_hospital, size: _size, color: Colors.black);
+        break;
+
+      case '15':
+        return Icon(Icons.paid, size: _size, color: Colors.black);
+        break;
+
+      case '16':
+        return Icon(Icons.star_rate, size: _size, color: Colors.black);
+        break;
+
+      case '17':
+        return Icon(Icons.outbound, size: _size, color: Colors.black);
+        break;
+
+      case '18':
+        return Icon(Icons.lightbulb_outline, size: _size, color: Colors.black);
+        break;
+
+      case '19':
+        return Icon(Icons.people_alt, size: _size, color: Colors.black);
+        break;
+
+      case '20':
+        return Icon(Icons.water_drop, size: _size, color: Colors.black);
+        break;
+
+      case '21':
+        return Icon(Icons.waving_hand, size: _size, color: Colors.black);
+        break;
+
+      case '22':
+        return Icon(Icons.send, size: _size, color: Colors.black);
+        break;
+
+      case '23':
+        return Icon(Icons.insights, size: _size, color: Colors.black);
+        break;
+
+      case '24':
+        return Icon(Icons.edit, size: _size, color: Colors.black);
+        break;
+
+      case '25':
+        return Icon(Icons.music_note, size: _size, color: Colors.black);
+        break;
+
+      case '26':
+        return Icon(Icons.bedtime, size: _size, color: Colors.black);
+        break;
+
+      case '27':
+        return Icon(Icons.currency_yen, size: _size, color: Colors.black);
+        break;
+
+      case '28':
+        return Icon(Icons.key, size: _size, color: Colors.black);
+        break;
+
+      case '29':
+        return Icon(Icons.stay_current_portrait,
+            size: _size, color: Colors.black);
+        break;
+
+      case '30':
+        return Icon(Icons.directions_run, size: _size, color: Colors.black);
+        break;
+
+      case '31':
+        return Icon(Icons.directions_walk, size: _size, color: Colors.black);
+        break;
+
+      case '32':
+        return Icon(Icons.directions_bike, size: _size, color: Colors.black);
+        break;
+
+      case '33':
+        return Icon(Icons.fastfood, size: _size, color: Colors.black);
+        break;
+
+      case '34':
+        return Icon(Icons.directions_bus, size: _size, color: Colors.black);
+        break;
+
+      case '35':
+        return Icon(Icons.local_florist, size: _size, color: Colors.black);
+        break;
+
+      case '36':
+        return Icon(Icons.play_circle, size: _size, color: Colors.black);
+        break;
+
+      case '37':
+        return Icon(Icons.savings, size: _size, color: Colors.black);
+        break;
+
+      case '38':
+        return Icon(Icons.arrow_right_alt, size: _size, color: Colors.black);
+        break;
+
+      case '39':
+        return Icon(Icons.pets, size: _size, color: Colors.black);
+        break;
+
+      case '40':
+        return Icon(Icons.flight_takeoff, size: _size, color: Colors.black);
+        break;
+
+      case '41':
+        return Icon(Icons.extension, size: _size, color: Colors.black);
+        break;
+
+      case '42':
+        return Icon(Icons.rocket_launch, size: _size, color: Colors.black);
+        break;
+
+      case '43':
+        return Icon(Icons.nightlight_round, size: _size, color: Colors.black);
+        break;
+
+      case '44':
+        return Icon(Icons.anchor, size: _size, color: Colors.black);
+        break;
+
+      case '45':
+        return Icon(Icons.home_filled, size: _size, color: Colors.black);
+        break;
+
+      case '46':
+        return Icon(Icons.transcribe, size: _size, color: Colors.black);
+        break;
+
+      case '47':
+        return Icon(Icons.school, size: _size, color: Colors.black);
+        break;
+
+      case '48':
+        return Icon(Icons.sports_esports, size: _size, color: Colors.black);
+        break;
+
+      case '49':
+        return Icon(Icons.self_improvement, size: _size, color: Colors.black);
+        break;
+
+      case '50':
+        return Icon(Icons.cake, size: _size, color: Colors.black);
+        break;
+
+      case '51':
+        return Icon(Icons.whatsapp, size: _size, color: Colors.black);
+        break;
+
+      case '52':
+        return Icon(Icons.emoji_emotions, size: _size, color: Colors.black);
+        break;
+
+      case '53':
+        return Icon(Icons.front_hand, size: _size, color: Colors.black);
+        break;
+
+      case '54':
+        return Icon(Icons.woman, size: _size, color: Colors.black);
+        break;
+
       default:
-        return Icon(Icons.ac_unit, size: 32, color: Colors.red);
+        return Icon(Icons.stop, size: 32, color: Colors.red);
         break;
     }
   }
