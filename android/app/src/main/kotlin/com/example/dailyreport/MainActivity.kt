@@ -1,4 +1,4 @@
-package jp.harada_educate.journal
+package jp.harada.journal
 
 import io.flutter.embedding.android.FlutterActivity
 
