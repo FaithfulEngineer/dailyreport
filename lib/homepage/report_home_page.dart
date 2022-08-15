@@ -23,7 +23,7 @@ import 'package:share_plus/share_plus.dart';
 int _idx = 0;
 int _cntStars = 0;
 bool _donef = false;
-String _email = 'NA';
+//String _email = 'NA';
 String _calltype = '1';
 Color _colorgray = Colors.grey;
 Color _colorbluck = Colors.black;
@@ -33,13 +33,20 @@ Color _colororenge = Colors.orange;
 Color? _iconColor;
 
 class ReportHomePage extends StatelessWidget {
+  String _email;
+
+  ReportHomePage(this._email) {
+    print(_email);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomePageModel>(
-        create: (_) => HomePageModel()..fetchReportList(),
+        create: (_) => HomePageModel(_email)..fetchReportList(),
         child: Consumer<HomePageModel>(builder: (context, model, child) {
           final List<Book>? books = model.books;
-
+          _email;
+          DateTime.now();
           return Scaffold(
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(70),

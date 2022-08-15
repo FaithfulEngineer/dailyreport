@@ -13,8 +13,12 @@ import 'package:intl/intl.dart';
 
 class HomePageModel extends ChangeNotifier {
   List<Book>? books;
-  DateTime? now;
   String? email;
+  DateTime? now;
+
+  HomePageModel(this.email) {
+    print('email={$email}');
+  }
 
   //void fetchReportList(String day, String email) async {
   void fetchReportList() async {

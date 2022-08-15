@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 title: (loginflg) ? Text('ログイン') : Text('ユーザＩＤで利用'),
                 actions: [
-                  IconButton(
+                  /* IconButton(
                       //アプリ終了
                       onPressed: () {
                         loginflg = true;
@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
                         exit(0);
                       },
                       //ユーザボタン
-                      icon: Icon(Icons.exit_to_app)),
+                      icon: Icon(Icons.exit_to_app)),*/
                   IconButton(
                       onPressed: () {
                         loginflg = model.setflg();

@@ -2,6 +2,9 @@ import '/add_setting/add_setting_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:dailyreport/setting/icon_select_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:io';
 
 bool _unituseflg = false;
 
@@ -32,6 +35,21 @@ class AddSettingPage extends StatelessWidget {
     return ChangeNotifierProvider<AddSettingModel>(
       create: (_) => AddSettingModel(),
       child: Scaffold(
+        endDrawer: Container(
+          width: 70,
+          child: Drawer(
+            child: ListView.builder(
+              itemCount: 1,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                    title: Text("退会"),
+                    onTap: () async {
+                      await showConfirmDialog(context);
+                    });
+              },
+            ),
+          ),
+        ),
         appBar: AppBar(
           title: Text('設定を追加'),
         ),
@@ -507,5 +525,50 @@ class AddSettingPage extends StatelessWidget {
         return Icon(Icons.stop, size: 32, color: Colors.red);
         break;
     }
+  }
+
+  Future showConfirmDialog(
+    BuildContext context,
+  ) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) {
+        return AlertDialog(
+          title: Text("削除の確認"),
+          content: Text("退会しますか？"),
+          actions: [
+            TextButton(
+              child: Text("いいえ"),
+              onPressed: () => Navigator.pop(context),
+            ),
+            TextButton(
+              child: Text("はい"),
+              onPressed: () async {
+                try {
+                  Navigator.pop(context);
+                  FirebaseAuth.instance.currentUser?.delete();
+                  await FirebaseAuth.instance.signOut();
+                } catch (e) {
+                  final snackBar = SnackBar(
+                    backgroundColor: Colors.red,
+                    content: Text(e.toString()),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+
+                final snackBar = SnackBar(
+                  backgroundColor: Colors.orange,
+                  content: Text("退会しました。APPを終了します。"),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                await new Future.delayed(new Duration(seconds: 3));
+                exit(0);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
